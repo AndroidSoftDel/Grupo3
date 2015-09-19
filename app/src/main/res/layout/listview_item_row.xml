@@ -21,7 +21,7 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/imageViewIcon"
         android:paddingRight="10dp"
-        android:text="Folder name here."
+        android:text="Folder."
         android:textSize="12dp"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:textColor="#ffffff" />
