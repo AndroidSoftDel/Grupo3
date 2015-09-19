@@ -1,0 +1,60 @@
+<resources>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <!--LAYOUT: RECHAZAR_ORDEN.XML-->
+    <string name="rechazar_orden_rechazar">Rechazar</string>
+
+
+
+    <!--LAYOUT: MAIN_LOGIN.XML-->
+    <string name="Usuario_login">Usuario:</string>
+    <string name="Password_login">Password:</string>
+    <string name="Ingresar_login">INGRESAR</string>
+    <string name="app_name">CDO Movistar - COBRA PERU</string>
+
+    <!--Action Bar: MENU-->
+    <string name="verMapa">Ver Mapa</string>
+    <string name="add_mat">Add Mat</string>
+
+    <!--LAYOUT: LISTA_ORDENES.XML-->
+    <string name="filtrar">Filtrar:</string>
+
+    <!--LAYOUT: DETALLE_ORDEN.XML-->
+    <string name="zonal_detalle">Zonal:</string>
+    <string name="negocio_detalle">Negocio:</string>
+    <string name="actividad_detalle">Actividad:</string>
+    <string name="orden_detalle">Orden:</string>
+    <string name="telefono_detalle">Teléfono:</string>
+    <string name="fecha_registro_detalle">F.Registro:</string>
+    <string name="cliente_detalle">Cliente:</string>
+    <string name="direccion_detalle">Dirección:</string>
+    <string name="mapa_detalle">MAPA</string>
+    <string name="liquidar_detalle">LIQUIDAR:</string>
+    <string name="rechazar_detalle">RECHAZAR</string>
+
+    <!--LAYOUT: LIQUIDAR_ORDEN.XML-->
+    <string name="liquidar_orden_id">Orden:</string>
+    <string name="liquidar_orden_telefono">Teléfono:</string>
+    <string name="datos_orden_liquidar"><u>DATOS DE ORDEN A LIQUIDAR</u></string>
+    <string name="datos_orden_rechazar"><u>DATOS DE ORDEN A RECHAZAR</u></string>
+    <string name="liquidar_orden_nombre">Nombre Cliente</string>
+    <string name="liquidar_orden_dni">DNI</string>
+    <string name="liquidar_orden_observaciones">Observaciones</string>
+    <string name="liquidar_orden_liquidar">Liquidar</string>
+    <string name="liquidar_orden_cancelar">Cancelar</string>
+
+    <string name="subtitulo_descripcion"><u>Descripción</u></string>
+    <string name="subtitulo_cantidad"><u>Cantidad</u></string>
+
+    <string name="liquidar_orden_agregar_materiales">Agregar Materiales</string>
+    <string name="liquidar_orden_materiales">Materiales</string>
+
+    <string-array name="navigation_drawer_items_array">
+        <item>Cambiar Contraseña</item>
+        <item>Ver Stock</item>
+        <item>Cerrar Sesion</item>
+    </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+</resources>
