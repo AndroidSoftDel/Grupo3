@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,7 +39,7 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
     public final static int CODE_Resul = 1;
     RecyclerView RVListaMaterialesAgregados;
     private RVMaterialesLiquidarAdpater RVAdaptador;
-    public final static String KEY_ARG = "KEY_ARG";
+    public final static String KEY_ARG = "KEY_ARG", KEY_MAT = "KEY_MAT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
         tilObservaciones_Liquidar = (TextInputLayout) findViewById(R.id.tilObservaciones_Liquidar);
 
         RVListaMaterialesAgregados = (RecyclerView) findViewById(R.id.rvMaterialesLiquidar);
+        RVListaMaterialesAgregados.setLayoutManager(new LinearLayoutManager(LiquidarOrdenActivity.this));
 
         if (getIntent().getExtras() != null && getIntent().getExtras().containsKey(ListaOrdenesActivity.ARG_ORDEN)) {
             listaOrdenes = getIntent().getParcelableExtra(ListaOrdenesActivity.ARG_ORDEN);
@@ -73,9 +75,10 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
         tilTelefono_Liquidar.getEditText().setKeyListener(null);
         /*ENVIAMOS EL FOCO A CLIENTE*/
         tilNombre_Liquidar.requestFocus();
-        listaStock = new ArrayList<StockMaterial>();
-        //RVAdaptador = new RVMaterialesLiquidarAdpater(new ArrayList<StockMaterial>());
-        //RVListaMaterialesAgregados.setAdapter(RVAdaptador);
+
+        //listaStock = new ArrayList<StockMaterial>();
+        RVAdaptador = new RVMaterialesLiquidarAdpater(new ArrayList<StockMaterial>());
+        RVListaMaterialesAgregados.setAdapter(RVAdaptador);
     }
 
     @Override
@@ -83,29 +86,13 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == CODE_Resul && resultCode == RESULT_OK) {
-            if (getIntent().getExtras() != null && getIntent().getExtras().containsKey(LiquidarOrdenActivity.KEY_ARG)) {
-               listaStock = getIntent().getParcelableArrayListExtra(LiquidarOrdenActivity.KEY_ARG);
+            if (data.getExtras() != null && data.getExtras().containsKey(KEY_ARG)) {
+                listaStock = data.getParcelableArrayListExtra(KEY_ARG);
+                for (int i = 0; i < listaStock.size(); i++) {
+                    RVAdaptador.addItem(listaStock.get(i));
+                }
+                RVAdaptador.notifyDataSetChanged();
             }
-
-            RVAdaptador = new RVMaterialesLiquidarAdpater(listaStock);
-            RVListaMaterialesAgregados.setAdapter(RVAdaptador);
-
-            //RVAdaptador.addItem(ml);
-            //StockMaterial d = new StockMaterial();
-            //d.setDescripcion("Cable Acometida");
-            //d.setCantidad(150);
-                        //RVAdaptador.addItem(d);
-            //RVAdaptador.notifyDataSetChanged();
-
-
-
-            /*
-            ArrayList<StockMaterial> listaMateriales;
-            listaMateriales = getIntent().getParcelableArrayListExtra(KEY_ARG);
-            for (int i = 0; i < listaMateriales.size(); i++) {
-                RVAdaptador.addItem(listaMateriales.get(i));
-            }
-            */
         }
 
     }
@@ -134,6 +121,7 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_agregar_materiales:
                 Intent intent = new Intent(LiquidarOrdenActivity.this, AddMaterialLiquidarActivity.class);
+                intent.putExtra(KEY_MAT, listaOrdenes);
                 startActivityForResult(intent, CODE_Resul);
                 //startActivity(intent);
                 return true;

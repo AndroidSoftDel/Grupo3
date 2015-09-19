@@ -44,7 +44,7 @@ public class RVMaterialesLiquidarAdpater extends RecyclerView.Adapter<RVMaterial
 
     public void addItem(StockMaterial sm) {
         mLstStockMaterial.add(sm);
-        this.notifyDataSetChanged();
+        //this.notifyDataSetChanged();
     }
 
 
