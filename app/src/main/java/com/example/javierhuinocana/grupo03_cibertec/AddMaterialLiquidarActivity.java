@@ -40,6 +40,11 @@ public class AddMaterialLiquidarActivity extends AppCompatActivity {
 
         rvStockMaterialAdapter = new RVStockMaterialAdapter();
         rvMaterial.setAdapter(rvStockMaterialAdapter);
+
+        if (getIntent().getExtras() != null && getIntent().getExtras().containsKey(LiquidarOrdenActivity.KEY_MAT)) {
+            ArrayList<StockMaterial> listaStock = getIntent().getParcelableArrayListExtra(ListaOrdenesActivity.ARG_ORDEN);
+
+        }
     }
 
     View.OnClickListener btnAgregarOnClickListener = new View.OnClickListener() {
