@@ -111,5 +111,7 @@ public class RVListadoAdapter extends RecyclerView.Adapter<RVListadoAdapter.RVLi
             tvActividad = (TextView) itemView.findViewById(R.id.tvActividad);
             chkChequeado = (CheckBox)itemView.findViewById(R.id.chkChequeado);
         }
+
+
     }
 }
