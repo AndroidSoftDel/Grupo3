@@ -1,0 +1,38 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="BtnPrimary">
+        <item name="android:background">#337AB7</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+    </style>
+    <style name="BtnSuccess">
+        <item name="android:background">#449D44</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+    </style>
+    <style name="BtnInfo">
+        <item name="android:background">#5BC0DE</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+    </style>
+    <style name="BtnWarning">
+        <item name="android:background">#F0AD4E</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+    </style>
+    <style name="BtnDanger">
+        <item name="android:background">#D9534F</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+    </style>
+</resources>
