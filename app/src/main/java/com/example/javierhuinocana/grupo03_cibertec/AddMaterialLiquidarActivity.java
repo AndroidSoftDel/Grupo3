@@ -47,13 +47,13 @@ public class AddMaterialLiquidarActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             ArrayList<StockMaterial> lista = new ArrayList<StockMaterial>();
-            //for (int i = 0; i < rvMaterial.getAdapter().getItemCount(); i++) {
-                //StockMaterial material = rvStockMaterialAdapter.getMaterial(i);
-                //if (material.getCantidad() > 0) {
-                    //lista.add(material);
-                //}
-            //}
-            lista = rvStockMaterialAdapter.listaMaterialadd();
+            for (int i = 0; i < rvMaterial.getAdapter().getItemCount(); i++) {
+                StockMaterial material = rvStockMaterialAdapter.getMaterial(i);
+                if (material.getCantidad() > 0) {
+                    lista.add(material);
+                }
+            }
+            //lista = rvStockMaterialAdapter.listaMaterialadd();
             Intent intent = new Intent();
             intent.putExtra(LiquidarOrdenActivity.KEY_ARG, lista);
             setResult(RESULT_OK, intent);

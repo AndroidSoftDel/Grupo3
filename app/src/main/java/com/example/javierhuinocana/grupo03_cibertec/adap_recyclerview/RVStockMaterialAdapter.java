@@ -24,7 +24,7 @@ import java.util.ArrayList;
  */
 public class RVStockMaterialAdapter extends RecyclerView.Adapter<RVStockMaterialAdapter.RVStockMaterialAdapterViewHolder> {
     private ArrayList<StockMaterial> mLstStockMaterial;//, mLstStockMaterialFilter;
-    private ArrayList<StockMaterial> mLstStockMaterialadd;
+    //private ArrayList<StockMaterial> mLstStockMaterialadd;
     //private RVStockMaterialAdapterCallBack mRVStockMaterialAdapterCallBack;
 
 //    public interface RVStockMaterialAdapterCallBack {
@@ -34,7 +34,7 @@ public class RVStockMaterialAdapter extends RecyclerView.Adapter<RVStockMaterial
     public RVStockMaterialAdapter() {
         //this.mRVStockMaterialAdapterCallBack = mRVStockMaterialAdapterCallBack;
         //mLstStockMaterialFilter = new ArrayList<>();
-        mLstStockMaterialadd = new ArrayList<>();
+        //mLstStockMaterialadd = new ArrayList<>();
         mLstStockMaterial = new ArrayList<>();
         mLstStockMaterial.addAll(new StockDAO().lstStockMaterial());
         //mLstStockMaterialFilter.addAll(mLstStockMaterial);
@@ -76,20 +76,21 @@ public class RVStockMaterialAdapter extends RecyclerView.Adapter<RVStockMaterial
                         }
                         /*GRABAMOS EN EL CAMPO DE LA ENTIDAD LA CANTIDAD INGRESADA*/
                         stockMaterial.setCantidad(Integer.parseInt(s.toString()));
-                        mLstStockMaterialadd.add(stockMaterial);
-
+                        //mLstStockMaterialadd.add(stockMaterial);
+                        //rvStockMaterialAdapterViewHolder.tvStock.setText(String.valueOf(mLstStockMaterialadd.size()));
                     } else {
                         if (!s.toString().equals("0")) {
                             rvStockMaterialAdapterViewHolder.tvCantidadAdd.setText("0");
                         }
                         stockMaterial.setCantidad(Integer.parseInt("0"));
                     }
-                }else{
+                } else {
                     stockMaterial.setCantidad(Integer.parseInt("0"));
                 }
             }
         });
     }
+
     /*FUNCION QUE DETERMINA SI UN TEXTO ES NUMERO ENTERO*/
     private static boolean isNum(String strNum) {
         boolean ret = true;
@@ -115,9 +116,10 @@ public class RVStockMaterialAdapter extends RecyclerView.Adapter<RVStockMaterial
     public StockMaterial getMaterial(int position) {
         return mLstStockMaterial.get(position);
     }
-    public  ArrayList<StockMaterial> listaMaterialadd(){
-        return mLstStockMaterialadd;
-    }
+
+    //public ArrayList<StockMaterial> listaMaterialadd() {
+    //    return mLstStockMaterialadd;
+    //}
 
 
     @Override
@@ -128,6 +130,7 @@ public class RVStockMaterialAdapter extends RecyclerView.Adapter<RVStockMaterial
     static class RVStockMaterialAdapterViewHolder extends RecyclerView.ViewHolder {
         TextView tvDescripcion, tvStock;
         EditText tvCantidadAdd;
+
         public RVStockMaterialAdapterViewHolder(View itemView) {
             super(itemView);
 
