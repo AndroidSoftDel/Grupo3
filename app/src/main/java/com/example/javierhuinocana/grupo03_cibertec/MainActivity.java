@@ -26,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //validar usuario y contraseña
+
+
+
+
                 Toast.makeText(MainActivity.this,"Bienvenido",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this,ListaOrdenesActivity.class);
                 startActivity(intent);

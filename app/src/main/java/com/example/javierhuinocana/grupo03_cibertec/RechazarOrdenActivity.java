@@ -22,8 +22,8 @@ public class RechazarOrdenActivity extends AppCompatActivity {
 
     private Button btnRechazarOrden_Rechazar, btnCancelar_Rechazar;
     private TextInputLayout tilNombre_Rechazar, tilDni_Rechazar, tilObservaciones_Rechazar;
-    TextView tvOrden_Rechazar, tvTelefono_Rechazar;
     ListaOrdenes listaOrdenes;
+    TextInputLayout tilOrden_Rechazar, tilTelefono_Rechazar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +37,8 @@ public class RechazarOrdenActivity extends AppCompatActivity {
         btnRechazarOrden_Rechazar = (Button) findViewById(R.id.btnRechazarOrden_Rechazar);
         btnCancelar_Rechazar = (Button) findViewById(R.id.btnCancelar_Rechazar);
 
-        tvOrden_Rechazar = (TextView) findViewById(R.id.tvOrden_Rechazar);
-        tvTelefono_Rechazar = (TextView) findViewById(R.id.tvTelefono_Rechazar);
+        tilOrden_Rechazar = (TextInputLayout) findViewById(R.id.tilOrden_Rechazar);
+        tilTelefono_Rechazar = (TextInputLayout) findViewById(R.id.tilTelefono_Rechazar);
 
 
         /*ASOCIAMOS EVENTO CLICK AL BOTON*/
@@ -47,8 +47,8 @@ public class RechazarOrdenActivity extends AppCompatActivity {
 
         if (getIntent().getExtras() != null && getIntent().getExtras().containsKey(ListaOrdenesActivity.ARG_ORDEN)) {
             listaOrdenes = getIntent().getParcelableExtra(ListaOrdenesActivity.ARG_ORDEN);
-            tvOrden_Rechazar.setText(listaOrdenes.getOrden());
-            tvTelefono_Rechazar.setText(listaOrdenes.getTelefono());
+            tilOrden_Rechazar.getEditText().setText(listaOrdenes.getOrden());
+            tilTelefono_Rechazar.getEditText().setText(listaOrdenes.getTelefono());
         }
     }
 
@@ -92,11 +92,11 @@ public class RechazarOrdenActivity extends AppCompatActivity {
                 String fecha = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", java.util.Locale.getDefault()).format(Calendar.getInstance().getTime());
                 listaOrdenes.setFecha_Liquidacion(fecha);
 
-                listaOrdenes.setOrden(tvOrden_Rechazar.getText().toString().trim());
+                listaOrdenes.setOrden(tilOrden_Rechazar.getEditText().getText().toString().trim());
 
                 ListadoDAO listadoDAO = new ListadoDAO();
                 long rc = listadoDAO.updateListado(listaOrdenes);
-                if(rc==1)
+                if (rc == 1)
                     Toast.makeText(RechazarOrdenActivity.this, "Orden Rechazada satisfactoriamente", Toast.LENGTH_LONG).show();
 
                 //Intent intent = new Intent();

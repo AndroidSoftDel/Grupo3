@@ -2,11 +2,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-
-
-    <string name="datos_orden_rechazar">Datos de la orden a rechazar:</string>
-
-
     <!--LAYOUT: RECHAZAR_ORDEN.XML-->
     <string name="rechazar_orden_rechazar">Rechazar</string>
 
@@ -42,6 +37,7 @@
     <string name="liquidar_orden_id">Orden:</string>
     <string name="liquidar_orden_telefono">Teléfono:</string>
     <string name="datos_orden_liquidar"><u>DATOS DE ORDEN A LIQUIDAR</u></string>
+    <string name="datos_orden_rechazar"><u>DATOS DE ORDEN A RECHAZAR</u></string>
     <string name="liquidar_orden_nombre">Nombre Cliente</string>
     <string name="liquidar_orden_dni">DNI</string>
     <string name="liquidar_orden_observaciones">Observaciones</string>
