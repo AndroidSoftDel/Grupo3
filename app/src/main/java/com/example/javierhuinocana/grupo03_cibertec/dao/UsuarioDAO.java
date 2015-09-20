@@ -1,5 +1,6 @@
 package com.example.javierhuinocana.grupo03_cibertec.dao;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 
 import com.example.javierhuinocana.grupo03_cibertec.entities.Usuario;
@@ -33,4 +34,21 @@ public class UsuarioDAO {
         return usu;
     }
 
+    public long actualizarContraseña(int idUser, String nuevaClave)
+    {
+        long rpta = 0;
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("Password", nuevaClave);
+
+            DataBaseHelper.myDataBase.beginTransaction();
+            rpta = DataBaseHelper.myDataBase.update("Usuario", cv, "IdUsuario = ?", new String[]{String.valueOf(idUser)});
+            DataBaseHelper.myDataBase.setTransactionSuccessful();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            DataBaseHelper.myDataBase.endTransaction();
+        }
+        return  rpta;
+    }
 }
