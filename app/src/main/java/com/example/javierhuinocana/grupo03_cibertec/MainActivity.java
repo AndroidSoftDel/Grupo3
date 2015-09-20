@@ -10,10 +10,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.javierhuinocana.grupo03_cibertec.dao.DataBaseHelper;
+import com.example.javierhuinocana.grupo03_cibertec.dao.UsuarioDAO;
+import com.example.javierhuinocana.grupo03_cibertec.entities.Usuario;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText txtUsuario,txtPassword;
     Button btnIngresar;
+    private DataBaseHelper dataBaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,15 +31,29 @@ public class MainActivity extends AppCompatActivity {
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                 /*CREAMOS Y/O COPIAMOS BD AL CELULAR*/
+                try {
+                    dataBaseHelper = new DataBaseHelper(MainActivity.this);
+                    dataBaseHelper.createDataBase();
+                    dataBaseHelper.openDataBase();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+
                 //validar usuario y contraseña
+                Usuario user = new Usuario();
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-
-
-
-                Toast.makeText(MainActivity.this,"Bienvenido",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this,ListaOrdenesActivity.class);
-                startActivity(intent);
-                finish();
+                if(usuarioDAO.obtenerUsuario(txtUsuario.getText().toString().trim(), txtPassword.getText().toString().trim()) != null)
+                {
+                    Toast.makeText(MainActivity.this,"Bienvenidortgyhy "+user.getNombres(),Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this,ListaOrdenesActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else
+                    Toast.makeText(MainActivity.this,"incorrecto",Toast.LENGTH_SHORT).show();
             }
         });
     }

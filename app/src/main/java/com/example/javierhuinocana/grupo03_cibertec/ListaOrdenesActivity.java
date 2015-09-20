@@ -43,7 +43,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
     private SpinerAdapter SpinerAdaptador;
     private RecyclerView rvPrincipal;
     private RVListadoAdapter rvListadoAdapter;
-    private DataBaseHelper dataBaseHelper;
+
     private DrawerLayout dlmenu;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     MenuItem menuVerMapa;
@@ -75,17 +75,6 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         /*ASOCIAMOS EL ADAPTADOR AL SPINER*/
         SpinerAdaptador = new SpinerAdapter(ListaOrdenesActivity.this,ArrayFiltro);
         cboFiltrar.setAdapter(SpinerAdaptador);
-
-
-        /*CREAMOS Y/O COPIAMOS BD AL CELULAR*/
-        try {
-            dataBaseHelper = new DataBaseHelper(ListaOrdenesActivity.this);
-            dataBaseHelper.createDataBase();
-            dataBaseHelper.openDataBase();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
 
         ArrayList<ListaOrdenes> arrayListTemporal;
         arrayListTemporal = new ArrayList<>();
