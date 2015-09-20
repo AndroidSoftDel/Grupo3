@@ -19,12 +19,13 @@ public class UsuarioDAO {
 
             if (cursor.moveToFirst()) {
                 usu = new Usuario();
-
-                usu.setIdUsuario(cursor.isNull(cursor.getColumnIndex("IdUsuario")) ? 0 : cursor.getInt(cursor.getColumnIndex("IdUsuario")));
-                usu.setUsuario(cursor.isNull(cursor.getColumnIndex("Usuario")) ? "" : cursor.getString(cursor.getColumnIndex("Usuario")));
-                usu.setPassword(cursor.isNull(cursor.getColumnIndex("Password")) ? "" : cursor.getString(cursor.getColumnIndex("Password")));
-                usu.setNombres(cursor.isNull(cursor.getColumnIndex("Nombres")) ? "" : cursor.getString(cursor.getColumnIndex("Nombres")));
-            }
+                do {
+                    usu.setIdUsuario(cursor.isNull(cursor.getColumnIndex("IdUsuario")) ? 0 : cursor.getInt(cursor.getColumnIndex("IdUsuario")));
+                    usu.setUsuario(cursor.isNull(cursor.getColumnIndex("Usuario")) ? "" : cursor.getString(cursor.getColumnIndex("Usuario")));
+                    usu.setPassword(cursor.isNull(cursor.getColumnIndex("Password")) ? "" : cursor.getString(cursor.getColumnIndex("Password")));
+                    usu.setNombres(cursor.isNull(cursor.getColumnIndex("Nombres")) ? "" : cursor.getString(cursor.getColumnIndex("Nombres")));
+            } while (cursor.moveToNext()) ;
+        }
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {

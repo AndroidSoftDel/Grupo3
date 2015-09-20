@@ -17,6 +17,9 @@
     <string name="verMapa">Ver Mapa</string>
     <string name="add_mat">Add Mat</string>
 
+    <!--Action Bar: MENU STOCK-->
+    <string name="vermenu">Ver Menu</string>
+
     <!--LAYOUT: LISTA_ORDENES.XML-->
     <string name="filtrar">Filtrar:</string>
 
@@ -62,6 +65,6 @@
         <item>Ver Stock</item>
         <item>Cerrar Sesion</item>
     </string-array>
-    <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
+    <string name="drawer_open">Ver menu</string>
+    <string name="drawer_close">Cerrar Menu</string>
 </resources>

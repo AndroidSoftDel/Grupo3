@@ -12,6 +12,7 @@ public class OrdenMaterial implements Parcelable {
     private int IdMaterial;
     private String Descripcion;
     private int Cantidad;
+    private int Stock;
 
     public OrdenMaterial() {
     }
@@ -56,12 +57,21 @@ public class OrdenMaterial implements Parcelable {
         Cantidad = cantidad;
     }
 
+    public int getStock() {
+        return Stock;
+    }
+
+    public void setStock(int stock) {
+        Stock = stock;
+    }
+
     protected OrdenMaterial(Parcel in) {
         IdRegistro = in.readInt();
         IdOrden = in.readInt();
         IdMaterial = in.readInt();
         Descripcion = in.readString();
         Cantidad = in.readInt();
+        Stock = in.readInt();
     }
 
     @Override
@@ -76,6 +86,7 @@ public class OrdenMaterial implements Parcelable {
         dest.writeInt(IdMaterial);
         dest.writeString(Descripcion);
         dest.writeInt(Cantidad);
+        dest.writeInt(Stock);
     }
 
     @SuppressWarnings("unused")

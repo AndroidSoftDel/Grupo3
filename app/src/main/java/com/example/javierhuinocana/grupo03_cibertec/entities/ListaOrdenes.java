@@ -22,6 +22,7 @@ public class ListaOrdenes implements Parcelable {
     private String Fecha_Liquidacion;
     private String Observaciones;
     private int Estado;
+    private int IdUsuario;
 
     public ListaOrdenes() {
     }
@@ -146,6 +147,14 @@ public class ListaOrdenes implements Parcelable {
         Estado = estado;
     }
 
+    public int getIdUsuario() {
+        return IdUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        IdUsuario = idUsuario;
+    }
+
     protected ListaOrdenes(Parcel in) {
         IdOrden = in.readInt();
         Zonal = in.readString();
@@ -162,6 +171,7 @@ public class ListaOrdenes implements Parcelable {
         Fecha_Liquidacion = in.readString();
         Observaciones = in.readString();
         Estado = in.readInt();
+        IdUsuario = in.readInt();
     }
 
     @Override
@@ -186,6 +196,7 @@ public class ListaOrdenes implements Parcelable {
         dest.writeString(Fecha_Liquidacion);
         dest.writeString(Observaciones);
         dest.writeInt(Estado);
+        dest.writeInt(IdUsuario);
     }
 
     @SuppressWarnings("unused")

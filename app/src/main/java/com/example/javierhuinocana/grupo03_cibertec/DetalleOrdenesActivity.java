@@ -24,6 +24,9 @@ public class DetalleOrdenesActivity extends AppCompatActivity {
     TextView tvFechaModicicacion_Detalle;
     LinearLayout lyFechaModificacion_Detalle;
 
+    public final int Code_LIQ = 1;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,9 +105,22 @@ public class DetalleOrdenesActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent = new Intent(DetalleOrdenesActivity.this, LiquidarOrdenActivity.class);
             intent.putExtra(ListaOrdenesActivity.ARG_ORDEN, listaOrdenes);
-            startActivity(intent);
+            startActivityForResult(intent, Code_LIQ);
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == Code_LIQ && resultCode == RESULT_OK) {
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
+        }
+
+    }
+
     View.OnClickListener btnRechazarOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

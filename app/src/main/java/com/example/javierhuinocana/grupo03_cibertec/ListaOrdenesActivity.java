@@ -37,6 +37,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
     public static final int estadoOrdenPendiente = 0;
     public static final int estadoOrdenLiquidada = 1;
     public static final int estadoOrdenRechazada = 10;
+    public final int Code_Respuesta = 2;
 
     Spinner cboFiltrar;
     private SpinerAdapter SpinerAdaptador;
@@ -72,38 +73,13 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         ArrayFiltro.add("Rechazadas");
 
         /*ASOCIAMOS EL ADAPTADOR AL SPINER*/
-        SpinerAdaptador = new SpinerAdapter(ListaOrdenesActivity.this,ArrayFiltro);
+        SpinerAdaptador = new SpinerAdapter(ListaOrdenesActivity.this, ArrayFiltro);
         cboFiltrar.setAdapter(SpinerAdaptador);
 
-        ArrayList<ListaOrdenes> arrayListTemporal;
-        arrayListTemporal = new ArrayList<>();
-        arrayListTemporal.addAll(new ListadoDAO().listOrdenes());
-
-        ListaArray_Pendientes = new ArrayList<ListaOrdenes>();
-        ListaArray_Liquidadas = new ArrayList<ListaOrdenes>();
-        ListaArray_Rechazadas = new ArrayList<ListaOrdenes>();
-
-        for (int i = 0; i < arrayListTemporal.size(); i++) {
-            switch (arrayListTemporal.get(i).getEstado()) {
-                case 0:
-                    /*PENDIENTES*/
-                    ListaArray_Pendientes.add(arrayListTemporal.get(i)); //, ListaArray_Liquidadas, ListaArray_Rechazadas;
-                    break;
-                case 1:
-                    ListaArray_Liquidadas.add(arrayListTemporal.get(i)); //, , ListaArray_Rechazadas;
-
-                    break;
-                case 10:
-                    ListaArray_Rechazadas.add(arrayListTemporal.get(i));
-                    break;
-            }
-        }
 
         rvPrincipal = (RecyclerView) findViewById(R.id.rvPrincipal);
         rvPrincipal.setHasFixedSize(true);
         rvPrincipal.setLayoutManager(new LinearLayoutManager(ListaOrdenesActivity.this));
-        rvListadoAdapter = new RVListadoAdapter(ListaOrdenesActivity.this, ListaArray_Pendientes);
-        rvPrincipal.setAdapter(rvListadoAdapter);
 
         cboFiltrar.setOnItemSelectedListener(cboFiltrarOnItemSelectedListener);
 
@@ -118,7 +94,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         drawerItem[3] = new ObjectDrawerItem(R.drawable.ic_action_ai_back, "Cerrar Sesion");
 
 
-        mNavigationDrawerItemTitles= getResources().getStringArray(R.array.navigation_drawer_items_array);
+        mNavigationDrawerItemTitles = getResources().getStringArray(R.array.navigation_drawer_items_array);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(ListaOrdenesActivity.this, R.layout.listview_item_row, drawerItem);
@@ -148,9 +124,39 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        SelectOrdenesActual();
     }
 
-    ListView.OnItemClickListener DrawerItemClickListener = new ListView.OnItemClickListener(){
+    public void SelectOrdenesActual() {
+        ArrayList<ListaOrdenes> arrayListTemporal;
+        arrayListTemporal = new ArrayList<>();
+        arrayListTemporal.addAll(new ListadoDAO().listOrdenes());
+
+        ListaArray_Pendientes = new ArrayList<ListaOrdenes>();
+        ListaArray_Liquidadas = new ArrayList<ListaOrdenes>();
+        ListaArray_Rechazadas = new ArrayList<ListaOrdenes>();
+
+        for (int i = 0; i < arrayListTemporal.size(); i++) {
+            switch (arrayListTemporal.get(i).getEstado()) {
+                case 0:
+                    /*PENDIENTES*/
+                    ListaArray_Pendientes.add(arrayListTemporal.get(i)); //, ListaArray_Liquidadas, ListaArray_Rechazadas;
+                    break;
+                case 1:
+                    ListaArray_Liquidadas.add(arrayListTemporal.get(i)); //, , ListaArray_Rechazadas;
+
+                    break;
+                case 10:
+                    ListaArray_Rechazadas.add(arrayListTemporal.get(i));
+                    break;
+            }
+        }
+
+        rvListadoAdapter = new RVListadoAdapter(ListaOrdenesActivity.this, ListaArray_Pendientes);
+        rvPrincipal.setAdapter(rvListadoAdapter);
+    }
+
+    ListView.OnItemClickListener DrawerItemClickListener = new ListView.OnItemClickListener() {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -277,9 +283,19 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         Intent intent = new Intent(ListaOrdenesActivity.this, DetalleOrdenesActivity.class);
         intent.putExtra(ARG_ORDEN, listaOrdenes);
         intent.putExtra(ARG_POSITION, position);
-        startActivity(intent);
+        startActivityForResult(intent,Code_Respuesta);
         //startActivityForResult(intent, REQUEST_CODE_EDITAR);
         //Toast.makeText(ListaOrdenesActivity.this, listaOrdenes.getOrden(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == Code_Respuesta && resultCode == RESULT_OK) {
+            SelectOrdenesActual();
+        }
+
     }
 
     @Override
@@ -293,7 +309,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
 
             if (ContadorCheck <= 0)
                 menuVerMapa.setIcon(R.drawable.ver_mapa_sin_color);
-                menuVerMapa.setEnabled(false);
+            menuVerMapa.setEnabled(false);
         }
     }
 

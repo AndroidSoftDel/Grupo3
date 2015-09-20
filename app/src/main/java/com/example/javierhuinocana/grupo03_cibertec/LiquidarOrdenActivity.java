@@ -18,6 +18,7 @@ import com.example.javierhuinocana.grupo03_cibertec.adap_recyclerview.RVListadoA
 import com.example.javierhuinocana.grupo03_cibertec.adap_recyclerview.RVMaterialesLiquidarAdpater;
 import com.example.javierhuinocana.grupo03_cibertec.dao.ListadoDAO;
 import com.example.javierhuinocana.grupo03_cibertec.entities.ListaOrdenes;
+import com.example.javierhuinocana.grupo03_cibertec.entities.OrdenMaterial;
 import com.example.javierhuinocana.grupo03_cibertec.entities.StockMaterial;
 
 import java.text.SimpleDateFormat;
@@ -144,7 +145,7 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            boolean isCorrect = true;
+            //boolean isCorrect = true;
             ListaOrdenes listaOrdenes = new ListaOrdenes();
 
             tilNombre_Liquidar.setErrorEnabled(false);
@@ -154,44 +155,70 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
             if (tilNombre_Liquidar.getEditText().getText().toString().trim().length() <= 0) {
                 tilNombre_Liquidar.setError("Ingrese un nombre de cliente");
                 tilNombre_Liquidar.setErrorEnabled(true);
-                isCorrect = false;
-            } else
+                //isCorrect = false;
+                return;
+            } else {
                 listaOrdenes.setClienteAtendio(tilNombre_Liquidar.getEditText().getText().toString().trim());
+            }
 
             if (tilDni_Liquidar.getEditText().getText().toString().trim().length() != 8) {
                 tilDni_Liquidar.setError("Ingrese un DNI válido");
                 tilDni_Liquidar.setErrorEnabled(true);
-                isCorrect = false;
-            } else
+                //isCorrect = false;
+                return;
+            } else {
                 listaOrdenes.setDniCliente(tilDni_Liquidar.getEditText().getText().toString().trim());
+            }
 
             if (tilObservaciones_Liquidar.getEditText().getText().toString().trim().length() <= 0) {
                 tilObservaciones_Liquidar.setError("Ingrese las observaciones");
                 tilObservaciones_Liquidar.setErrorEnabled(true);
-                isCorrect = false;
-            } else
+                //isCorrect = false;
+                return;
+            } else {
                 listaOrdenes.setObservaciones(tilObservaciones_Liquidar.getEditText().getText().toString().trim());
-
-            if (isCorrect) {
-
-                //estado para orden rechazada = 10
-                listaOrdenes.setEstado(ListaOrdenesActivity.estadoOrdenLiquidada);
-                //se obtiene la fecha
-                String fecha = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", java.util.Locale.getDefault()).format(Calendar.getInstance().getTime());
-                listaOrdenes.setFecha_Liquidacion(fecha);
-
-                listaOrdenes.setOrden(tilOrden_Liquidar.getEditText().getText().toString().trim());
-
-                ListadoDAO listadoDAO = new ListadoDAO();
-                long rc = listadoDAO.updateListado(listaOrdenes);
-                if (rc == 1)
-                    Toast.makeText(LiquidarOrdenActivity.this, "Orden liquidada satisfactoriamente", Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent();
-                //intent.putExtra(MainActivity.ARG_PERSONA, persona);
-                //intent.putExtra(MainActivity.ARG_POSITION, position);
-                //setResult(RESULT_OK, intent);
-                finish();
             }
+
+
+            ArrayList<OrdenMaterial> DataMaterialesGuardar = new ArrayList<OrdenMaterial>();
+            for (int i = 0; i < listaStock.size(); i++) {
+                OrdenMaterial OrdMat = new OrdenMaterial();
+                OrdMat.setIdOrden(listaOrdenes.getIdOrden());
+                OrdMat.setDescripcion(listaStock.get(i).getDescripcion());
+                OrdMat.setIdRegistro(0);
+                OrdMat.setCantidad(listaStock.get(i).getCantidad());
+                OrdMat.setStock(listaStock.get(i).getStock());
+                OrdMat.setIdMaterial(listaStock.get(i).getIdMaterial());
+                DataMaterialesGuardar.add(OrdMat);
+            }
+
+
+            //if (isCorrect) {
+
+            //estado para orden rechazada = 10
+            listaOrdenes.setEstado(ListaOrdenesActivity.estadoOrdenLiquidada);
+            //se obtiene la fecha
+            String fecha = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", java.util.Locale.getDefault()).format(Calendar.getInstance().getTime());
+            listaOrdenes.setFecha_Liquidacion(fecha);
+
+            listaOrdenes.setOrden(tilOrden_Liquidar.getEditText().getText().toString().trim());
+
+            ListadoDAO listadoDAO = new ListadoDAO();
+            long rc = listadoDAO.LiquidarOrden(listaOrdenes, DataMaterialesGuardar);
+            if (rc == 0) {
+                Toast.makeText(LiquidarOrdenActivity.this, "No se liquidó Orden", Toast.LENGTH_SHORT).show();
+            }else{
+                Intent intent = new Intent();
+                setResult(RESULT_OK,intent);
+                finish();
+
+            }
+            //Intent intent = new Intent();
+            //intent.putExtra(MainActivity.ARG_PERSONA, persona);
+            //intent.putExtra(MainActivity.ARG_POSITION, position);
+            //setResult(RESULT_OK, intent);
+
+            //}
         }
     };
 
