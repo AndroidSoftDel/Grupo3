@@ -24,6 +24,7 @@ import android.support.v7.widget.RecyclerView;
 import com.example.javierhuinocana.grupo03_cibertec.adap_recyclerview.DrawerItemCustomAdapter;
 import com.example.javierhuinocana.grupo03_cibertec.adap_recyclerview.RVListadoAdapter;
 import com.example.javierhuinocana.grupo03_cibertec.adap_spiner.SpinerAdapter;
+import com.example.javierhuinocana.grupo03_cibertec.dao.DataBaseHelper;
 import com.example.javierhuinocana.grupo03_cibertec.dao.ListadoDAO;
 import com.example.javierhuinocana.grupo03_cibertec.entities.ListaOrdenes;
 import com.example.javierhuinocana.grupo03_cibertec.entities.ObjectDrawerItem;
@@ -56,6 +57,8 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
     public final static String ARG_ORDEN = "orden", ARG_POSITION = "position";
     private final static int REQUEST_CODE_EDITAR = 2;
     private ArrayList<ListaOrdenes> ListaArray_Pendientes, ListaArray_Liquidadas, ListaArray_Rechazadas;
+
+    private DataBaseHelper dataBaseHelper;
 
 
     @Override
@@ -128,6 +131,15 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
     }
 
     public void SelectOrdenesActual() {
+          /*CREAMOS Y/O COPIAMOS BD AL CELULAR*/
+        try {
+            dataBaseHelper = new DataBaseHelper(ListaOrdenesActivity.this);
+            dataBaseHelper.createDataBase();
+            dataBaseHelper.openDataBase();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         ArrayList<ListaOrdenes> arrayListTemporal;
         arrayListTemporal = new ArrayList<>();
         arrayListTemporal.addAll(new ListadoDAO().listOrdenes());
