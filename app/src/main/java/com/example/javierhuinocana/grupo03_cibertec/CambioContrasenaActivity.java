@@ -1,6 +1,7 @@
 package com.example.javierhuinocana.grupo03_cibertec;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
@@ -59,6 +60,11 @@ public class CambioContrasenaActivity extends AppCompatActivity {
                     if (rpta != 0) {
                         new AlertDialog.Builder(CambioContrasenaActivity.this).setTitle("Cambio de Contraseña").setMessage("Se ha cambiado la clave satisfactoriamente").
                                 setNeutralButton("Aceptar", CambioClaveOnClickListener).setCancelable(false).show();
+                        //eliminar toda la pila de actividades y llamar a login
+                        //SharedPreferences preferencias = getSharedPreferences("Usuario", MODE_PRIVATE);
+                        //SharedPreferences.Editor editor=preferencias.edit();
+                        //editor.remove(preferencias);
+                        //se eliminan los datos de shared preferences
                     }
                 } else {
                     new AlertDialog.Builder(CambioContrasenaActivity.this).setTitle("Cambio de Contraseña").setMessage("Las contraseñas no coinciden").

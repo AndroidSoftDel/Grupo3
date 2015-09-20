@@ -1,7 +1,9 @@
 package com.example.javierhuinocana.grupo03_cibertec;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnIngresar;
     private DataBaseHelper dataBaseHelper;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +33,15 @@ public class MainActivity extends AppCompatActivity {
         txtUsuario = (EditText) findViewById(R.id.txtUsuario);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
         btnIngresar = (Button) findViewById(R.id.btnIngresar);
+        final SharedPreferences preferencias = getSharedPreferences("Usuario", MODE_PRIVATE);
+
+        if(preferencias.contains("nombreUsuario"))
+        {
+            Toast.makeText(MainActivity.this, "Bienvenido " + preferencias.getString("nombreUsuario", "").toString(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, ListaOrdenesActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,14 +54,18 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-
-
                 //validar usuario y contraseña
                 Usuario user ;
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
                 user = usuarioDAO.obtenerUsuario(txtUsuario.getText().toString().trim().toLowerCase(), txtPassword.getText().toString().trim().toLowerCase());
                 if ( user != null) {
                     Toast.makeText(MainActivity.this, "Bienvenido " + user.getNombres(), Toast.LENGTH_SHORT).show();
+                    //guardando nombre de usuario en shared preferences
+                    SharedPreferences.Editor editor=preferencias.edit();
+                    editor.putString("IdUsuario", String.valueOf(user.getIdUsuario()));
+                    editor.putString("nombreUsuario", user.getNombres().toString().toLowerCase());
+                    editor.commit();
+
                     Intent intent = new Intent(MainActivity.this, ListaOrdenesActivity.class);
                     startActivity(intent);
                     finish();
