@@ -74,14 +74,8 @@ public class CambioContrasenaActivity extends AppCompatActivity {
             user = usuarioDAO.obtenerUsuario(preferences.getString("nickUsuario", "").toString().trim().toLowerCase(),
                     tilAntiguaClave_cambioClave.getEditText().getText().toString().trim().toLowerCase());
 
-            Toast.makeText(CambioContrasenaActivity.this, "nick: " + preferences.getString("nickUsuario", "").toString().trim().toLowerCase()
-                    , Toast.LENGTH_SHORT).show();
-
-            //validar usuario y contraseña
+                        //validar usuario y contraseña
             if (user != null) {
-                Toast.makeText(CambioContrasenaActivity.this, "user: " + user.getNombres()
-                       + " clave: "+user.getPassword(), Toast.LENGTH_SHORT).show();
-
                 //validar que las nuevas claves coincidan
                 if (tilNuevaClave_cambioClave.getEditText().getText().toString().trim().toLowerCase().
                         equals(tilNuevaClave2_cambioClave.getEditText().getText().toString().trim().toLowerCase())) {
