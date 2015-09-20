@@ -1,10 +1,14 @@
 package com.example.javierhuinocana.grupo03_cibertec;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
@@ -79,11 +83,16 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
 
         cboFiltrar.setOnItemSelectedListener(cboFiltrarOnItemSelectedListener);
 
-        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[3];
+        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[4];
 
-        drawerItem[0] = new ObjectDrawerItem(R.drawable.ic_action_ai_settings, "Cambiar Contraseña");
-        drawerItem[1] = new ObjectDrawerItem(R.drawable.ic_action_ai_storage, "Ver Stock");
-        drawerItem[2] = new ObjectDrawerItem(R.drawable.ic_action_ai_back, "Cerrar Sesion");
+        SharedPreferences preferences = getSharedPreferences("Usuario", Context.MODE_PRIVATE);
+
+
+        drawerItem[0] = new ObjectDrawerItem(R.drawable.ic_action_ai_back, preferences.getString("nombreUsuario", "").toString());
+        drawerItem[1] = new ObjectDrawerItem(R.drawable.ic_action_ai_settings, "Cambiar Contraseña");
+        drawerItem[2] = new ObjectDrawerItem(R.drawable.ic_action_ai_storage, "Ver Stock");
+        drawerItem[3] = new ObjectDrawerItem(R.drawable.ic_action_ai_back, "Cerrar Sesion");
+
 
         mNavigationDrawerItemTitles = getResources().getStringArray(R.array.navigation_drawer_items_array);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -100,7 +109,6 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
                 invalidateOptionsMenu();
-                Toast.makeText(ListaOrdenesActivity.this, "Closed", Toast.LENGTH_SHORT).show();
                 rvPrincipal.setEnabled(true);
             }
 
@@ -108,7 +116,6 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 invalidateOptionsMenu();
-                Toast.makeText(ListaOrdenesActivity.this, "Opened", Toast.LENGTH_SHORT).show();
                 rvPrincipal.setEnabled(false);
             }
         };
@@ -155,20 +162,23 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent;
             switch (position) {
-                //cambiar contraseña
+                //nombre de usuario
                 case 0:
+                    break;
+                //cambiar contraseña
+                case 1:
                     intent = new Intent(ListaOrdenesActivity.this, CambioContrasenaActivity.class);
                     startActivity(intent);
                     break;
                 //ver stock
-                case 1:
+                case 2:
                     intent = new Intent(ListaOrdenesActivity.this, StockUsuarioActivity.class);
                     startActivity(intent);
                     break;
                 //cerrar sesion
-                case 2:
+                case 3:
+                    new AlertDialog.Builder(ListaOrdenesActivity.this).setTitle("Cerrar Sesion").setMessage("¿Desea cerrar sesion?").setNegativeButton("Cancelar", alertAcceptCancelCancelOnClickListener).setPositiveButton("Aceptar", alertAcceptCancelAcceptOnClickListener).setCancelable(false).show();
                     break;
-
                 default:
                     break;
             }
@@ -302,4 +312,24 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
             menuVerMapa.setEnabled(false);
         }
     }
+
+    DialogInterface.OnClickListener alertAcceptCancelAcceptOnClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            SharedPreferences settings = getSharedPreferences("Usuario", Context.MODE_PRIVATE);
+            settings.edit().clear().commit();
+            Intent intent = new Intent(ListaOrdenesActivity.this, MainActivity.class);
+            startActivity(intent);
+            dialogInterface.dismiss();
+        }
+    };
+
+    DialogInterface.OnClickListener alertAcceptCancelCancelOnClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            dialogInterface.dismiss();
+            finish();
+        }
+    };
+
 }

@@ -42,6 +42,7 @@
             android:ellipsize="end"
             android:hint="@string/antigua_clave_cambioClave"
             android:inputType="textPassword"
+            android:maxLength="15"
             android:singleLine="true"
             android:textSize="14sp"
             android:textStyle="normal" />
@@ -60,6 +61,7 @@
             android:ellipsize="end"
             android:hint="@string/nueva_clave_cambioClave"
             android:inputType="textPassword"
+            android:maxLength="15"
             android:singleLine="true"
             android:textSize="14sp"
             android:textStyle="normal" />
@@ -77,6 +79,7 @@
             android:ellipsize="end"
             android:hint="@string/nuevaclave2_cambioClave"
             android:inputType="textPassword"
+            android:maxLength="15"
             android:singleLine="true"
             android:textSize="14sp"
             android:textStyle="normal" />
@@ -93,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:text="@string/Ingresar_login" />
+            android:text="@string/btnCambiarClave" />
 
         <Button
             android:id="@+id/btnCancelar_cambioclave"
