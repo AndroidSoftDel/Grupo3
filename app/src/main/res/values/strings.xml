@@ -50,6 +50,13 @@
     <string name="liquidar_orden_agregar_materiales">Agregar Materiales</string>
     <string name="liquidar_orden_materiales">Materiales</string>
 
+    <!--Cammbio de clave -->
+    <string name="usuario_cambioClave">Usuario</string>
+    <string name="antigua_clave_cambioClave">Contraseña actual</string>
+    <string name="nueva_clave_cambioClave">Contraseña nueva</string>
+    <string name="nuevaclave2_cambioClave">Reingrese nueva contraseña</string>
+    <string name="btnCambiarClave">Cambiar Contraseña</string>
+
     <string-array name="navigation_drawer_items_array">
         <item>Cambiar Contraseña</item>
         <item>Ver Stock</item>

@@ -11,20 +11,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.javierhuinocana.grupo03_cibertec.adap_recyclerview.DrawerItemCustomAdapter;
 import com.example.javierhuinocana.grupo03_cibertec.adap_recyclerview.RVListadoAdapter;
 import com.example.javierhuinocana.grupo03_cibertec.adap_spiner.SpinerAdapter;
-import com.example.javierhuinocana.grupo03_cibertec.dao.DataBaseHelper;
 import com.example.javierhuinocana.grupo03_cibertec.dao.ListadoDAO;
 import com.example.javierhuinocana.grupo03_cibertec.entities.ListaOrdenes;
 import com.example.javierhuinocana.grupo03_cibertec.entities.ObjectDrawerItem;
@@ -152,15 +147,19 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+            Intent intent;
             switch (position) {
+                //cambiar contraseña
                 case 0:
-
-                    break;
-                case 1:
-                    Intent intent = new Intent(ListaOrdenesActivity.this, StockUsuarioActivity.class);
+                    intent = new Intent(ListaOrdenesActivity.this, CambioContrasenaActivity.class);
                     startActivity(intent);
                     break;
+                //ver stock
+                case 1:
+                    intent = new Intent(ListaOrdenesActivity.this, StockUsuarioActivity.class);
+                    startActivity(intent);
+                    break;
+                //cerrar sesion
                 case 2:
                     break;
 

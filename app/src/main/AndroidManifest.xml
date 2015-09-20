@@ -10,7 +10,7 @@
 
     <uses-feature
         android:glEsVersion="0x00020000"
-        android:required="true"/>
+        android:required="true" />
 
     <meta-data
         android:name="com.google.android.gms.version"
@@ -24,7 +24,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDsKJaJewI1TkVzMSxBHyThDmP0RQk6KNg"/>
+            android:value="AIzaSyDsKJaJewI1TkVzMSxBHyThDmP0RQk6KNg" />
 
         <activity
             android:name=".MainActivity"
@@ -37,36 +37,33 @@
         </activity>
         <activity
             android:name=".ListaOrdenesActivity"
-            android:label="Listado de Ordenes">
-        </activity>
+            android:label="Listado de Ordenes"></activity>
         <activity
             android:name=".DetalleOrdenesActivity"
             android:label="Detalle de Orden"
-            android:parentActivityName=".ListaOrdenesActivity" >
+            android:parentActivityName=".ListaOrdenesActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ListaOrdenesActivity" />
         </activity>
         <activity
             android:name=".LiquidarOrdenActivity"
-            android:label="Liquidar Orden">
-        </activity>
+            android:label="Liquidar Orden"></activity>
         <activity
             android:name=".RechazarOrdenActivity"
-            android:label="Rechazar Orden">
-        </activity>
+            android:label="Rechazar Orden"></activity>
         <activity
             android:name=".AddMaterialLiquidarActivity"
-            android:label="Agregar Material">
-        </activity>
+            android:label="Agregar Material"></activity>
         <activity
             android:name=".Mapa_Ordenes"
-            android:label="Mapa Ordenes">
-        </activity>
+            android:label="Mapa Ordenes"></activity>
         <activity
             android:name=".StockUsuarioActivity"
-            android:label="Stock Materiales">
-        </activity>
+            android:label="Stock Materiales"></activity>
+        <activity
+            android:name=".CambioContrasenaActivity"
+            android:label="Cambio Contrasena"></activity>
     </application>
 
 </manifest>
