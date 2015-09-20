@@ -180,7 +180,9 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
                     break;
                 //cerrar sesion
                 case 3:
-                    new AlertDialog.Builder(ListaOrdenesActivity.this).setTitle("Cerrar Sesion").setMessage("¿Desea cerrar sesion?").setNegativeButton("Cancelar", alertAcceptCancelCancelOnClickListener).setPositiveButton("Aceptar", alertAcceptCancelAcceptOnClickListener).setCancelable(false).show();
+                    new AlertDialog.Builder(ListaOrdenesActivity.this).setTitle("Cerrar Sesion").setMessage("¿Desea cerrar sesion?")
+                            .setNegativeButton("Cancelar", alertCancelOnClickListener).setPositiveButton("Aceptar", alertAcceptOnClickListener)
+                            .setCancelable(false).show();
                     break;
                 default:
                     break;
@@ -316,22 +318,23 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         }
     }
 
-    DialogInterface.OnClickListener alertAcceptCancelAcceptOnClickListener = new DialogInterface.OnClickListener() {
+    DialogInterface.OnClickListener alertAcceptOnClickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
             SharedPreferences settings = getSharedPreferences("Usuario", Context.MODE_PRIVATE);
             settings.edit().clear().commit();
             Intent intent = new Intent(ListaOrdenesActivity.this, MainActivity.class);
+                finish();
+
             startActivity(intent);
             dialogInterface.dismiss();
         }
     };
 
-    DialogInterface.OnClickListener alertAcceptCancelCancelOnClickListener = new DialogInterface.OnClickListener() {
+    DialogInterface.OnClickListener alertCancelOnClickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
             dialogInterface.dismiss();
-            finish();
         }
     };
 
