@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import java.util.ArrayList;
 
 import com.example.javierhuinocana.grupo03_cibertec.entities.ListaOrdenes;
+import com.example.javierhuinocana.grupo03_cibertec.entities.OrdenMaterial;
+
 /**
  * Created by luisrios on 9/5/15.
  */
@@ -38,6 +40,7 @@ public class ListadoDAO {
                     listaOrdenes.setFecha_Liquidacion(cursor.isNull(cursor.getColumnIndex("Fecha_Liquidacion")) ? "" : cursor.getString(cursor.getColumnIndex("Fecha_Liquidacion")));
                     listaOrdenes.setObservaciones(cursor.isNull(cursor.getColumnIndex("Observaciones")) ? "" : cursor.getString(cursor.getColumnIndex("Observaciones")));
                     listaOrdenes.setEstado(cursor.isNull(cursor.getColumnIndex("Estado")) ? 0 : cursor.getInt(cursor.getColumnIndex("Estado")));
+                    listaOrdenes.setIdUsuario(cursor.isNull(cursor.getColumnIndex("IdUsuario")) ? 0 : cursor.getInt(cursor.getColumnIndex("IdUsuario")));
                     lstOrdenes.add(listaOrdenes);
                 } while (cursor.moveToNext());
             }
@@ -51,6 +54,34 @@ public class ListadoDAO {
         return lstOrdenes;
     }
 
+    public ArrayList<OrdenMaterial> listOrdenMaterial(String IdOrden) {
+        ArrayList<OrdenMaterial> lstOrdenMaterial = new ArrayList<>();
+        Cursor cursor = null;
+
+
+        try {
+            cursor = DataBaseHelper.myDataBase.query("OrdenMaterial", null, "IdOrden=? ", new String[]{IdOrden}, null, null, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    OrdenMaterial ordenMaterial = new OrdenMaterial();
+                    ordenMaterial.setIdOrden(cursor.isNull(cursor.getColumnIndex("IdOrden")) ? 0 : cursor.getInt(cursor.getColumnIndex("IdOrden")));
+                    ordenMaterial.setIdMaterial(cursor.isNull(cursor.getColumnIndex("IdMaterial")) ? 0 : cursor.getInt(cursor.getColumnIndex("IdMaterial")));
+                    ordenMaterial.setDescripcion(cursor.isNull(cursor.getColumnIndex("Descripcion")) ? "" : cursor.getString(cursor.getColumnIndex("Descripcion")));
+                    ordenMaterial.setCantidad(cursor.isNull(cursor.getColumnIndex("Cantidad")) ? 0 : cursor.getInt(cursor.getColumnIndex("Cantidad")));
+                    ordenMaterial.setStock(0);
+                    lstOrdenMaterial.add(ordenMaterial);
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+
+        return lstOrdenMaterial;
+    }
+
 
     public long updateListado(ListaOrdenes listaOrdenes) {
         long udp = 0;
@@ -61,6 +92,7 @@ public class ListadoDAO {
             cv.put("Fecha_Liquidacion", listaOrdenes.getFecha_Liquidacion());
             cv.put("Estado", listaOrdenes.getEstado());
             cv.put("Observaciones", listaOrdenes.getObservaciones());
+            cv.put("IdUsuario", listaOrdenes.getIdUsuario());
 
             DataBaseHelper.myDataBase.beginTransaction();
             udp = DataBaseHelper.myDataBase.update("ListaOrdenes", cv, "Orden = ?", new String[]{String.valueOf(listaOrdenes.getOrden())});
@@ -70,7 +102,51 @@ public class ListadoDAO {
         } finally {
             DataBaseHelper.myDataBase.endTransaction();
         }
-        return  udp;
+        return udp;
+    }
+
+    public long LiquidarOrden(ListaOrdenes listaOrdenes, ArrayList<OrdenMaterial> ordenMaterial) {
+        long udp = 0;
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put("ClienteAtendio", listaOrdenes.getClienteAtendio());
+            cv.put("DniCliente", listaOrdenes.getDniCliente());
+            cv.put("Fecha_Liquidacion", listaOrdenes.getFecha_Liquidacion());
+            cv.put("Estado", listaOrdenes.getEstado());
+            cv.put("Observaciones", listaOrdenes.getObservaciones());
+            cv.put("IdUsuario", listaOrdenes.getIdUsuario());
+
+            DataBaseHelper.myDataBase.beginTransaction();
+            udp = DataBaseHelper.myDataBase.update("ListaOrdenes", cv, "Orden = ?", new String[]{String.valueOf(listaOrdenes.getOrden())});
+
+            cv = new ContentValues();
+            for (int i = 0; i < ordenMaterial.size(); i++) {
+                OrdenMaterial OrdMat = ordenMaterial.get(i);
+                cv.put("Cantidad", OrdMat.getStock() - OrdMat.getCantidad());
+                udp = DataBaseHelper.myDataBase.update("StockMaterial", cv, "IdMaterial = ?", new String[]{String.valueOf(OrdMat.getIdMaterial())});
+
+                ContentValues cm = new ContentValues();
+                cm.put("IdOrden", OrdMat.getIdOrden());
+                cm.put("IdMaterial", OrdMat.getIdMaterial());
+                cm.put("Descripcion", OrdMat.getDescripcion());
+                cm.put("Cantidad", OrdMat.getCantidad());
+                udp = DataBaseHelper.myDataBase.insert("OrdenMaterial", null, cm);
+
+                if (udp == 0) {
+                    throw new Exception();
+                }
+            }
+
+            DataBaseHelper.myDataBase.setTransactionSuccessful();
+            udp = 1;
+        } catch (Exception ex) {
+            udp = 0;
+            ex.printStackTrace();
+        } finally {
+            DataBaseHelper.myDataBase.endTransaction();
+
+        }
+        return udp;
     }
 
 }

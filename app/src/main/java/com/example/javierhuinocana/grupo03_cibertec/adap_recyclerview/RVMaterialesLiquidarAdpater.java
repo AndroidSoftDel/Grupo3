@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.javierhuinocana.grupo03_cibertec.R;
@@ -50,11 +51,13 @@ public class RVMaterialesLiquidarAdpater extends RecyclerView.Adapter<RVMaterial
 
     static class RVMaterialesViewHolder extends RecyclerView.ViewHolder {
         TextView lblDescripcion, lblCantidad;
+        ImageButton imagenDelete;
 
         public RVMaterialesViewHolder(View itemView) {
             super(itemView);
             lblDescripcion = (TextView) itemView.findViewById(R.id.lblDescripcion_Item_Material_Liquidar);
             lblCantidad = (TextView) itemView.findViewById(R.id.lblCantidad_Item_Material_Liquidar);
+            imagenDelete = (ImageButton)itemView.findViewById(R.id.imagenEliminar_Item_Material_Liquidar);
         }
     }
 }
