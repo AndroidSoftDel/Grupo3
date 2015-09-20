@@ -131,15 +131,6 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
     }
 
     public void SelectOrdenesActual() {
-          /*CREAMOS Y/O COPIAMOS BD AL CELULAR*/
-        try {
-            dataBaseHelper = new DataBaseHelper(ListaOrdenesActivity.this);
-            dataBaseHelper.createDataBase();
-            dataBaseHelper.openDataBase();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
         ArrayList<ListaOrdenes> arrayListTemporal;
         arrayListTemporal = new ArrayList<>();
         arrayListTemporal.addAll(new ListadoDAO().listOrdenes());
