@@ -75,8 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString("nombreUsuario", user.getNombres().toString().toLowerCase());
                     editor.putString("nickUsuario", user.getUsuario().toString().toLowerCase());
                     editor.commit();
-                    Toast.makeText(MainActivity.this, "user: " + user.getNombres()
-                            + " clave: " + user.getPassword(), Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(MainActivity.this, ListaOrdenesActivity.class);
                     startActivity(intent);
                     finish();
