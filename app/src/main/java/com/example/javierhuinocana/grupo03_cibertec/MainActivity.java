@@ -35,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
         btnIngresar = (Button) findViewById(R.id.btnIngresar);
         final SharedPreferences preferencias = getSharedPreferences("Usuario", MODE_PRIVATE);
 
-        if(preferencias.contains("nombreUsuario"))
-        {
+        if (preferencias.contains("nombreUsuario")) {
             Toast.makeText(MainActivity.this, "Bienvenido " + preferencias.getString("nombreUsuario", "").toString(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, ListaOrdenesActivity.class);
             startActivity(intent);
@@ -55,22 +54,32 @@ public class MainActivity extends AppCompatActivity {
                     ex.printStackTrace();
                 }
                 //validar usuario y contraseña
-                Usuario user ;
+                Usuario user;
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+                if(txtUsuario.getText().toString().trim().length()<=0 || txtPassword.getText().toString().trim().length() <=0)
+                {
+                    new AlertDialog.Builder(MainActivity.this).setTitle("Login").setMessage("Ingrese usuario y contraseña").
+                            setNeutralButton("Aceptar", alertSingleOnClickListener).setCancelable(false).show();
+                    return;
+                }
+                //consulta a base de datos
                 user = usuarioDAO.obtenerUsuario(txtUsuario.getText().toString().trim().toLowerCase(), txtPassword.getText().toString().trim().toLowerCase());
-                if ( user != null) {
+
+                if (user != null) {
                     Toast.makeText(MainActivity.this, "Bienvenido " + user.getNombres(), Toast.LENGTH_SHORT).show();
                     //guardando nombre de usuario en shared preferences
-                    SharedPreferences.Editor editor=preferencias.edit();
+                    SharedPreferences.Editor editor = preferencias.edit();
                     editor.putString("IdUsuario", String.valueOf(user.getIdUsuario()));
                     editor.putString("nombreUsuario", user.getNombres().toString().toLowerCase());
+                    editor.putString("nickUsuario", user.getUsuario().toString().toLowerCase());
                     editor.commit();
-
+                    Toast.makeText(MainActivity.this, "user: " + user.getNombres()
+                            + " clave: " + user.getPassword(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, ListaOrdenesActivity.class);
                     startActivity(intent);
                     finish();
-                }
-                else{
+                } else {
                     new AlertDialog.Builder(MainActivity.this).setTitle("Login").setMessage("Usuario o contraseña incorrecta").
                             setNeutralButton("Aceptar", alertSingleOnClickListener).setCancelable(false).show();
                     txtUsuario.setText("");

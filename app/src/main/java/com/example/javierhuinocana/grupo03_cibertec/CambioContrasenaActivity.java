@@ -1,6 +1,8 @@
 package com.example.javierhuinocana.grupo03_cibertec;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -8,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.javierhuinocana.grupo03_cibertec.dao.UsuarioDAO;
 import com.example.javierhuinocana.grupo03_cibertec.entities.Usuario;
@@ -19,20 +22,25 @@ public class CambioContrasenaActivity extends AppCompatActivity {
 
     TextInputLayout tilUsuario_cambioClave, tilAntiguaClave_cambioClave, tilNuevaClave_cambioClave, tilNuevaClave2_cambioClave;
     Button btnCambiarClave, btnCancelar_cambioclave;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cambio_clave);
+        preferences = getSharedPreferences("Usuario", Context.MODE_PRIVATE);
 
         tilUsuario_cambioClave = (TextInputLayout) findViewById(R.id.tilUsuario_cambioClave);
         tilAntiguaClave_cambioClave = (TextInputLayout) findViewById(R.id.tilAntiguaClave_cambioClave);
         tilNuevaClave_cambioClave = (TextInputLayout) findViewById(R.id.tilNuevaClave_cambioClave);
         tilNuevaClave2_cambioClave = (TextInputLayout) findViewById(R.id.tilNuevaClave2_cambioClave);
 
+        tilUsuario_cambioClave.getEditText().setText(preferences.getString("nickUsuario", "").toString());
+        tilUsuario_cambioClave.getEditText().setKeyListener(null);
+
         btnCambiarClave = (Button) findViewById(R.id.btnCambiarClave);
         btnCancelar_cambioclave = (Button) findViewById(R.id.btnCancelar_cambioclave);
-
+        tilAntiguaClave_cambioClave.getEditText().requestFocus();
         btnCambiarClave.setOnClickListener(btnCambiarClavesetOnClickListener);
 
 
@@ -41,15 +49,38 @@ public class CambioContrasenaActivity extends AppCompatActivity {
     View.OnClickListener btnCambiarClavesetOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Usuario user;
+            Usuario user = new Usuario();
             UsuarioDAO usuarioDAO = new UsuarioDAO();
             long rpta;
 
-            user = usuarioDAO.obtenerUsuario(tilUsuario_cambioClave.getEditText().getText().toString().trim().toLowerCase(),
+            if (tilAntiguaClave_cambioClave.getEditText().getText().toString().trim().length() <= 0) {
+                tilAntiguaClave_cambioClave.setErrorEnabled(true);
+                tilAntiguaClave_cambioClave.setError("Ingrese clave actual");
+                return;
+            }
+
+            if (tilNuevaClave_cambioClave.getEditText().getText().toString().trim().length() <= 0) {
+                tilNuevaClave_cambioClave.setErrorEnabled(true);
+                tilNuevaClave_cambioClave.setError("Ingrese clave nueva");
+                return;
+            }
+
+            if (tilNuevaClave2_cambioClave.getEditText().getText().toString().trim().length() <= 0) {
+                tilNuevaClave2_cambioClave.setErrorEnabled(true);
+                tilNuevaClave2_cambioClave.setError("Ingrese clave nueva");
+                return;
+            }
+
+            user = usuarioDAO.obtenerUsuario(preferences.getString("nickUsuario", "").toString().trim().toLowerCase(),
                     tilAntiguaClave_cambioClave.getEditText().getText().toString().trim().toLowerCase());
+
+            Toast.makeText(CambioContrasenaActivity.this, "nick: " + preferences.getString("nickUsuario", "").toString().trim().toLowerCase()
+                    , Toast.LENGTH_SHORT).show();
 
             //validar usuario y contraseña
             if (user != null) {
+                Toast.makeText(CambioContrasenaActivity.this, "user: " + user.getNombres()
+                       + " clave: "+user.getPassword(), Toast.LENGTH_SHORT).show();
 
                 //validar que las nuevas claves coincidan
                 if (tilNuevaClave_cambioClave.getEditText().getText().toString().trim().toLowerCase().
@@ -60,10 +91,7 @@ public class CambioContrasenaActivity extends AppCompatActivity {
                     if (rpta != 0) {
                         new AlertDialog.Builder(CambioContrasenaActivity.this).setTitle("Cambio de Contraseña").setMessage("Se ha cambiado la clave satisfactoriamente").
                                 setNeutralButton("Aceptar", CambioClaveOnClickListener).setCancelable(false).show();
-                        //eliminar toda la pila de actividades y llamar a login
-                        //SharedPreferences preferencias = getSharedPreferences("Usuario", MODE_PRIVATE);
-                        //SharedPreferences.Editor editor=preferencias.edit();
-                        //editor.remove(preferencias);
+
                         //se eliminan los datos de shared preferences
                     }
                 } else {
@@ -74,14 +102,19 @@ public class CambioContrasenaActivity extends AppCompatActivity {
                     tilNuevaClave_cambioClave.getEditText().setFocusable(true);
                 }
 
-            } else {
-                new AlertDialog.Builder(CambioContrasenaActivity.this).setTitle("Cambio de Contraseña").setMessage("Usuario o contraseña incorrecta").
+            }
+            //usuario y clave incorrectas
+            else {
+
+                new AlertDialog.Builder(CambioContrasenaActivity.this).setTitle("Cambio de Contraseña").setMessage("Usuario o contraseña incorrecta"
+                        + " user: "+preferences.getString("nickUsuario", "").toString().trim().toLowerCase()+ " pass: "+
+                        tilAntiguaClave_cambioClave.getEditText().getText().toString().trim().toLowerCase()).
                         setNeutralButton("Aceptar", alertSingleOnClickListener).setCancelable(false).show();
-                tilUsuario_cambioClave.getEditText().setText("");
+
                 tilAntiguaClave_cambioClave.getEditText().setText("");
                 tilNuevaClave_cambioClave.getEditText().setText("");
                 tilNuevaClave2_cambioClave.getEditText().setText("");
-                tilUsuario_cambioClave.getEditText().setFocusable(true);
+                tilUsuario_cambioClave.getEditText().requestFocus();
             }
 
         }
@@ -98,8 +131,8 @@ public class CambioContrasenaActivity extends AppCompatActivity {
     DialogInterface.OnClickListener CambioClaveOnClickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
-            finish();
             dialogInterface.dismiss();
+            finish();
         }
     };
 

@@ -11,8 +11,7 @@
         android:id="@+id/logoCDO"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo_cdo"
-        />
+        android:src="@drawable/logo_cdo" />
 
     <TextView
         android:id="@+id/lblUsuario"
@@ -26,7 +25,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/lblUsuario"
-        android:drawableRight="@drawable/user_16" />
+        android:drawableRight="@drawable/user_16"
+        android:maxLength="15"
+        android:singleLine="true" />
 
     <TextView
         android:id="@+id/lblPassword"
@@ -40,9 +41,11 @@
         android:id="@+id/txtPassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
         android:layout_below="@id/lblPassword"
-        android:drawableRight="@drawable/key" />
+        android:drawableRight="@drawable/key"
+        android:inputType="textPassword"
+        android:maxLength="15"
+        android:singleLine="true" />
 
     <Button
         android:id="@+id/btnIngresar"

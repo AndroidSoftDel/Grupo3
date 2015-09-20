@@ -55,7 +55,7 @@
     <string name="antigua_clave_cambioClave">Contraseña actual</string>
     <string name="nueva_clave_cambioClave">Contraseña nueva</string>
     <string name="nuevaclave2_cambioClave">Reingrese nueva contraseña</string>
-    <string name="btnCambiarClave">Cambiar Contraseña</string>
+    <string name="btnCambiarClave">Cambiar clave</string>
 
     <string-array name="navigation_drawer_items_array">
         <item>Cambiar Contraseña</item>
