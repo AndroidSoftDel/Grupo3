@@ -91,10 +91,10 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         SharedPreferences preferences = getSharedPreferences("Usuario", Context.MODE_PRIVATE);
 
 
-        drawerItem[0] = new ObjectDrawerItem(R.drawable.ic_action_ai_back, preferences.getString("nombreUsuario", "").toString());
-        drawerItem[1] = new ObjectDrawerItem(R.drawable.ic_action_ai_settings, "Cambiar Contraseña");
-        drawerItem[2] = new ObjectDrawerItem(R.drawable.ic_action_ai_storage, "Ver Stock");
-        drawerItem[3] = new ObjectDrawerItem(R.drawable.ic_action_ai_back, "Cerrar Sesion");
+        drawerItem[0] = new ObjectDrawerItem(R.drawable.user_white, preferences.getString("nombreUsuario", "").toString());
+        drawerItem[1] = new ObjectDrawerItem(R.drawable.change_password_white, "Cambiar Contraseña");
+        drawerItem[2] = new ObjectDrawerItem(R.drawable.stock_white , "Ver Stock");
+        drawerItem[3] = new ObjectDrawerItem(R.drawable.close_white, "Cerrar Sesion");
 
 
         mNavigationDrawerItemTitles = getResources().getStringArray(R.array.navigation_drawer_items_array);
