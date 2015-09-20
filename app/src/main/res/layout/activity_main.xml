@@ -40,6 +40,7 @@
         android:id="@+id/txtPassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:inputType="textPassword"
         android:layout_below="@id/lblPassword"
         android:drawableRight="@drawable/key" />
 

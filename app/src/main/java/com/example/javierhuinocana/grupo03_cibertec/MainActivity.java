@@ -1,6 +1,8 @@
 package com.example.javierhuinocana.grupo03_cibertec;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,17 +18,18 @@ import com.example.javierhuinocana.grupo03_cibertec.entities.Usuario;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText txtUsuario,txtPassword;
+    EditText txtUsuario, txtPassword;
     Button btnIngresar;
     private DataBaseHelper dataBaseHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        txtUsuario=(EditText)findViewById(R.id.txtUsuario);
-        txtPassword=(EditText)findViewById(R.id.txtPassword);
-        btnIngresar=(Button)findViewById(R.id.btnIngresar);
+        txtUsuario = (EditText) findViewById(R.id.txtUsuario);
+        txtPassword = (EditText) findViewById(R.id.txtPassword);
+        btnIngresar = (Button) findViewById(R.id.btnIngresar);
 
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,21 +45,32 @@ public class MainActivity extends AppCompatActivity {
 
 
                 //validar usuario y contraseña
-                Usuario user = new Usuario();
+                Usuario user ;
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
-
-                if(usuarioDAO.obtenerUsuario(txtUsuario.getText().toString().trim(), txtPassword.getText().toString().trim()) != null)
-                {
-                    Toast.makeText(MainActivity.this,"Bienvenidortgyhy "+user.getNombres(),Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this,ListaOrdenesActivity.class);
+                user = usuarioDAO.obtenerUsuario(txtUsuario.getText().toString().trim().toLowerCase(), txtPassword.getText().toString().trim().toLowerCase());
+                if ( user != null) {
+                    Toast.makeText(MainActivity.this, "Bienvenido " + user.getNombres(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, ListaOrdenesActivity.class);
                     startActivity(intent);
                     finish();
                 }
-                else
-                    Toast.makeText(MainActivity.this,"incorrecto",Toast.LENGTH_SHORT).show();
+                else{
+                    new AlertDialog.Builder(MainActivity.this).setTitle("Login").setMessage("Usuario o contraseña incorrecta").
+                            setNeutralButton("Aceptar", alertSingleOnClickListener).setCancelable(false).show();
+                    txtUsuario.setText("");
+                    txtPassword.setText("");
+                    txtUsuario.setFocusable(true);
+                }
             }
         });
     }
 
+
+    DialogInterface.OnClickListener alertSingleOnClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            dialogInterface.dismiss();
+        }
+    };
 
 }

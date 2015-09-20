@@ -11,20 +11,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.javierhuinocana.grupo03_cibertec.adap_recyclerview.DrawerItemCustomAdapter;
 import com.example.javierhuinocana.grupo03_cibertec.adap_recyclerview.RVListadoAdapter;
 import com.example.javierhuinocana.grupo03_cibertec.adap_spiner.SpinerAdapter;
-import com.example.javierhuinocana.grupo03_cibertec.dao.DataBaseHelper;
 import com.example.javierhuinocana.grupo03_cibertec.dao.ListadoDAO;
 import com.example.javierhuinocana.grupo03_cibertec.entities.ListaOrdenes;
 import com.example.javierhuinocana.grupo03_cibertec.entities.ObjectDrawerItem;
@@ -73,7 +68,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         ArrayFiltro.add("Rechazadas");
 
         /*ASOCIAMOS EL ADAPTADOR AL SPINER*/
-        SpinerAdaptador = new SpinerAdapter(ListaOrdenesActivity.this, ArrayFiltro);
+        SpinerAdaptador = new SpinerAdapter(ListaOrdenesActivity.this,ArrayFiltro);
         cboFiltrar.setAdapter(SpinerAdaptador);
 
         ArrayList<ListaOrdenes> arrayListTemporal;
@@ -114,7 +109,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         drawerItem[1] = new ObjectDrawerItem(R.drawable.ic_action_ai_storage, "Ver Stock");
         drawerItem[2] = new ObjectDrawerItem(R.drawable.ic_action_ai_back, "Cerrar Sesion");
 
-        mNavigationDrawerItemTitles = getResources().getStringArray(R.array.navigation_drawer_items_array);
+        mNavigationDrawerItemTitles= getResources().getStringArray(R.array.navigation_drawer_items_array);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(ListaOrdenesActivity.this, R.layout.listview_item_row, drawerItem);
@@ -148,25 +143,26 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
 
     }
 
-    ListView.OnItemClickListener DrawerItemClickListener = new ListView.OnItemClickListener() {
+    ListView.OnItemClickListener DrawerItemClickListener = new ListView.OnItemClickListener(){
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+            Intent intent;
             switch (position) {
+                //cambiar contraseña
                 case 0:
-                    dlmenu.closeDrawers();
+                    intent = new Intent(ListaOrdenesActivity.this, CambioContrasenaActivity.class);
+                    startActivity(intent);
                     break;
+                //ver stock
                 case 1:
-                    Intent verstock = new Intent(ListaOrdenesActivity.this, StockUsuarioActivity.class);
-                    startActivity(verstock);
-                    dlmenu.closeDrawers();
+                    intent = new Intent(ListaOrdenesActivity.this, StockUsuarioActivity.class);
+                    startActivity(intent);
                     break;
+                //cerrar sesion
                 case 2:
-                    Intent cerrarsesion = new Intent(ListaOrdenesActivity.this, MainActivity.class);
-                    startActivity(cerrarsesion);
-                    dlmenu.closeDrawers();
                     break;
+
                 default:
                     break;
             }
@@ -287,7 +283,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
 
             if (ContadorCheck <= 0)
                 menuVerMapa.setIcon(R.drawable.ver_mapa_sin_color);
-            menuVerMapa.setEnabled(false);
+                menuVerMapa.setEnabled(false);
         }
     }
 }
