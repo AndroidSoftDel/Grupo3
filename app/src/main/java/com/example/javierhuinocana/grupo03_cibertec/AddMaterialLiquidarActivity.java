@@ -42,7 +42,20 @@ public class AddMaterialLiquidarActivity extends AppCompatActivity {
         rvMaterial.setAdapter(rvStockMaterialAdapter);
 
         if (getIntent().getExtras() != null && getIntent().getExtras().containsKey(LiquidarOrdenActivity.KEY_MAT)) {
-            ArrayList<StockMaterial> listaStock = getIntent().getParcelableArrayListExtra(ListaOrdenesActivity.ARG_ORDEN);
+            ArrayList<StockMaterial> listaStock = getIntent().getParcelableArrayListExtra(LiquidarOrdenActivity.KEY_MAT);
+            for (int i = 0; i < listaStock.size(); i++) {
+                ArrayList<StockMaterial> Temp = rvStockMaterialAdapter.getListaActual();
+                int pos = -1;
+                for (int j = 0; j < Temp.size(); j++) {
+                    if (listaStock.get(i).getIdMaterial() == Temp.get(j).getIdMaterial()) {
+                        pos = j;
+                        break;
+                    }
+                }
+                if (pos != -1) {
+                    Temp.remove(pos);
+                }
+            }
 
         }
     }

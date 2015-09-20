@@ -118,6 +118,9 @@ public class RVStockMaterialAdapter extends RecyclerView.Adapter<RVStockMaterial
     }
 
  //   private ArrayList<StockMaterial> mLstStockMaterial;//, mLstStockMaterialFilter;
+    public ArrayList<StockMaterial> getListaActual(){
+        return mLstStockMaterial;
+    }
 
 
     @Override

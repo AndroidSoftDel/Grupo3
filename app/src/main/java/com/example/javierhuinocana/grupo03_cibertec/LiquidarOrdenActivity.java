@@ -41,6 +41,7 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
     private RVMaterialesLiquidarAdpater RVAdaptador;
     public final static String KEY_ARG = "KEY_ARG", KEY_MAT = "KEY_MAT";
 
+    /******************************************************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,20 +77,23 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
         /*ENVIAMOS EL FOCO A CLIENTE*/
         tilNombre_Liquidar.requestFocus();
 
-        //listaStock = new ArrayList<StockMaterial>();
+        listaStock = new ArrayList<StockMaterial>();
         RVAdaptador = new RVMaterialesLiquidarAdpater(new ArrayList<StockMaterial>());
         RVListaMaterialesAgregados.setAdapter(RVAdaptador);
     }
 
+    /******************************************************************************************************************************/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == CODE_Resul && resultCode == RESULT_OK) {
             if (data.getExtras() != null && data.getExtras().containsKey(KEY_ARG)) {
-                listaStock = data.getParcelableArrayListExtra(KEY_ARG);
-                for (int i = 0; i < listaStock.size(); i++) {
-                    RVAdaptador.addItem(listaStock.get(i));
+                ArrayList<StockMaterial> Temp = data.getParcelableArrayListExtra(KEY_ARG);
+
+                for (int i = 0; i < Temp.size(); i++) {
+                    RVAdaptador.addItem(Temp.get(i));
+                    listaStock.add(Temp.get(i));
                 }
                 RVAdaptador.notifyDataSetChanged();
             }
@@ -97,6 +101,7 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
 
     }
 
+    /******************************************************************************************************************************/
     View.OnClickListener btnLiquidarOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -105,6 +110,7 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
         }
     };
 
+    /******************************************************************************************************************************/
 
     //agregar nuevo repo
     @Override
@@ -116,12 +122,14 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /******************************************************************************************************************************/
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_agregar_materiales:
                 Intent intent = new Intent(LiquidarOrdenActivity.this, AddMaterialLiquidarActivity.class);
-                intent.putExtra(KEY_MAT, listaOrdenes);
+                intent.putExtra(KEY_MAT, listaStock);
                 startActivityForResult(intent, CODE_Resul);
                 //startActivity(intent);
                 return true;
@@ -129,6 +137,8 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    /******************************************************************************************************************************/
 
     View.OnClickListener btnLiquidarOrden_LiquidarOnClickListener = new View.OnClickListener() {
 
@@ -184,6 +194,9 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
             }
         }
     };
+
+    /******************************************************************************************************************************/
+
     View.OnClickListener btnCancelar_LiquidarOnClickListener = new View.OnClickListener() {
 
         @Override
