@@ -33,6 +33,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
     public static final int estadoOrdenPendiente = 0;
     public static final int estadoOrdenLiquidada = 1;
     public static final int estadoOrdenRechazada = 10;
+    public final int Code_Respuesta = 2;
 
     Spinner cboFiltrar;
     private SpinerAdapter SpinerAdaptador;
@@ -52,7 +53,6 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
     private final static int REQUEST_CODE_EDITAR = 2;
     private ArrayList<ListaOrdenes> ListaArray_Pendientes, ListaArray_Liquidadas, ListaArray_Rechazadas;
 
-    public final int Code_Respuesta = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
