@@ -73,7 +73,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         ArrayFiltro.add("Rechazadas");
 
         /*ASOCIAMOS EL ADAPTADOR AL SPINER*/
-        SpinerAdaptador = new SpinerAdapter(ListaOrdenesActivity.this,ArrayFiltro);
+        SpinerAdaptador = new SpinerAdapter(ListaOrdenesActivity.this, ArrayFiltro);
         cboFiltrar.setAdapter(SpinerAdaptador);
 
         ArrayList<ListaOrdenes> arrayListTemporal;
@@ -114,7 +114,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         drawerItem[1] = new ObjectDrawerItem(R.drawable.ic_action_ai_storage, "Ver Stock");
         drawerItem[2] = new ObjectDrawerItem(R.drawable.ic_action_ai_back, "Cerrar Sesion");
 
-        mNavigationDrawerItemTitles= getResources().getStringArray(R.array.navigation_drawer_items_array);
+        mNavigationDrawerItemTitles = getResources().getStringArray(R.array.navigation_drawer_items_array);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(ListaOrdenesActivity.this, R.layout.listview_item_row, drawerItem);
@@ -148,22 +148,25 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
 
     }
 
-    ListView.OnItemClickListener DrawerItemClickListener = new ListView.OnItemClickListener(){
+    ListView.OnItemClickListener DrawerItemClickListener = new ListView.OnItemClickListener() {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
             switch (position) {
                 case 0:
-
+                    dlmenu.closeDrawers();
                     break;
                 case 1:
-                    Intent intent = new Intent(ListaOrdenesActivity.this, StockUsuarioActivity.class);
-                    startActivity(intent);
+                    Intent verstock = new Intent(ListaOrdenesActivity.this, StockUsuarioActivity.class);
+                    startActivity(verstock);
+                    dlmenu.closeDrawers();
                     break;
                 case 2:
+                    Intent cerrarsesion = new Intent(ListaOrdenesActivity.this, MainActivity.class);
+                    startActivity(cerrarsesion);
+                    dlmenu.closeDrawers();
                     break;
-
                 default:
                     break;
             }
@@ -284,7 +287,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
 
             if (ContadorCheck <= 0)
                 menuVerMapa.setIcon(R.drawable.ver_mapa_sin_color);
-                menuVerMapa.setEnabled(false);
+            menuVerMapa.setEnabled(false);
         }
     }
 }
