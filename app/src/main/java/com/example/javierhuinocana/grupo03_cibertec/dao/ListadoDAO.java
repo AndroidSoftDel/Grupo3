@@ -58,7 +58,6 @@ public class ListadoDAO {
         ArrayList<OrdenMaterial> lstOrdenMaterial = new ArrayList<>();
         Cursor cursor = null;
 
-
         try {
             cursor = DataBaseHelper.myDataBase.query("OrdenMaterial", null, "IdOrden=? ", new String[]{IdOrden}, null, null, null);
             if (cursor.moveToFirst()) {
@@ -81,7 +80,6 @@ public class ListadoDAO {
 
         return lstOrdenMaterial;
     }
-
 
     public long updateListado(ListaOrdenes listaOrdenes) {
         long udp = 0;
