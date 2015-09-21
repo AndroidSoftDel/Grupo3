@@ -5,13 +5,16 @@
     <!--LAYOUT: RECHAZAR_ORDEN.XML-->
     <string name="rechazar_orden_rechazar">Rechazar</string>
 
-
-
     <!--LAYOUT: MAIN_LOGIN.XML-->
     <string name="Usuario_login">User:</string>
     <string name="Password_login">Password:</string>
     <string name="Ingresar_login">ACCEPT</string>
     <string name="app_name">CDO Movistar - COBRA PERU</string>
+    <string name="Bienvenido">Welcome</string>
+    <string name="LoginTitulo_login">Login</string>
+    <string name="Ingrese_Usuario_Contrasenia">Enter Username and Password</string>
+    <string name="Usuario_Contrasenia_Icorrecta_login">User and / or password incorrect</string>
+    <string name="Aceptar_login">OK</string>
 
     <!--Action Bar: MENU-->
     <string name="verMapa">See Map</string>
@@ -37,34 +40,34 @@
     <string name="rechazar_detalle">REJECT</string>
 
     <!--LAYOUT: LIQUIDAR_ORDEN.XML-->
-    <string name="liquidar_orden_id">Orden:</string>
-    <string name="liquidar_orden_telefono">Teléfono:</string>
-    <string name="datos_orden_liquidar"><u>DATOS DE ORDEN A LIQUIDAR</u></string>
-    <string name="datos_orden_rechazar"><u>DATOS DE ORDEN A RECHAZAR</u></string>
-    <string name="liquidar_orden_nombre">Nombre Cliente</string>
+    <string name="liquidar_orden_id">Order:</string>
+    <string name="liquidar_orden_telefono">Phone:</string>
+    <string name="datos_orden_liquidar"><u>DATA ORDER TO BE SETTLED</u></string>
+    <string name="datos_orden_rechazar"><u>DATA ORDER TO REFUSE</u></string>
+    <string name="liquidar_orden_nombre">Customer Name</string>
     <string name="liquidar_orden_dni">DNI</string>
-    <string name="liquidar_orden_observaciones">Observaciones</string>
-    <string name="liquidar_orden_liquidar">Liquidar</string>
-    <string name="liquidar_orden_cancelar">Cancelar</string>
+    <string name="liquidar_orden_observaciones">Observations</string>
+    <string name="liquidar_orden_liquidar">Settle</string>
+    <string name="liquidar_orden_cancelar">Cancel</string>
 
-    <string name="subtitulo_descripcion"><u>Descripción</u></string>
-    <string name="subtitulo_cantidad"><u>Cantidad</u></string>
+    <string name="subtitulo_descripcion"><u>Description</u></string>
+    <string name="subtitulo_cantidad"><u>Quantity</u></string>
 
-    <string name="liquidar_orden_agregar_materiales">Agregar Materiales</string>
-    <string name="liquidar_orden_materiales">Materiales</string>
+    <string name="liquidar_orden_agregar_materiales">Add Materials</string>
+    <string name="liquidar_orden_materiales">Materials</string>
 
     <!--Cammbio de clave -->
-    <string name="usuario_cambioClave">Usuario</string>
-    <string name="antigua_clave_cambioClave">Contraseña actual</string>
-    <string name="nueva_clave_cambioClave">Contraseña nueva</string>
-    <string name="nuevaclave2_cambioClave">Reingrese nueva contraseña</string>
-    <string name="btnCambiarClave">Cambiar clave</string>
+    <string name="usuario_cambioClave">User</string>
+    <string name="antigua_clave_cambioClave">Current Password</string>
+    <string name="nueva_clave_cambioClave">New Password</string>
+    <string name="nuevaclave2_cambioClave">Re-enter new password</string>
+    <string name="btnCambiarClave">Change Password</string>
 
     <string-array name="navigation_drawer_items_array">
-        <item>Cambiar Contraseña</item>
-        <item>Ver Stock</item>
-        <item>Cerrar Sesion</item>
+        <item>Change Password</item>
+        <item>Check Stock</item>
+        <item>Close session</item>
     </string-array>
-    <string name="drawer_open">Ver menu</string>
-    <string name="drawer_close">Cerrar Menu</string>
+    <string name="drawer_open">View Menu</string>
+    <string name="drawer_close">Close Menu</string>
 </resources>

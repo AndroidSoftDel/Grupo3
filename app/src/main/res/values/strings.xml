@@ -5,13 +5,16 @@
     <!--LAYOUT: RECHAZAR_ORDEN.XML-->
     <string name="rechazar_orden_rechazar">Rechazar</string>
 
-
-
     <!--LAYOUT: MAIN_LOGIN.XML-->
     <string name="Usuario_login">Usuario:</string>
     <string name="Password_login">Password:</string>
     <string name="Ingresar_login">INGRESAR</string>
     <string name="app_name">CDO Movistar - COBRA PERU</string>
+    <string name="Bienvenido">Bienvenido</string>
+    <string name="LoginTitulo_login">Iniciar Sesión</string>
+    <string name="Ingrese_Usuario_Contrasenia">Ingrese Usuario y Contraseña</string>
+    <string name="Usuario_Contrasenia_Icorrecta_login">User and password incorrect</string>
+    <string name="Aceptar_login">Aceptar</string>
 
     <!--Action Bar: MENU-->
     <string name="verMapa">Ver Mapa</string>
@@ -49,6 +52,7 @@
 
     <string name="subtitulo_descripcion"><u>Descripción</u></string>
     <string name="subtitulo_cantidad"><u>Cantidad</u></string>
+    <string name="subtitulo_del"><u>DEL</u></string>
 
     <string name="liquidar_orden_agregar_materiales">Agregar Materiales</string>
     <string name="liquidar_orden_materiales">Materiales</string>

@@ -26,8 +26,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDsKJaJewI1TkVzMSxBHyThDmP0RQk6KNg" />
 
-        <activity android:name=".EscogerIdioma"
-            android:label="CDO COBRA PERU MOVISTAR">
+        <activity android:name=".MainActivity"
+            android:label="CDO COBRA PERU MOVISTAR"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,39 +38,48 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:name=".LoginActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity
             android:name=".ListaOrdenesActivity"
-            android:label="Listado de Ordenes"></activity>
+            android:label="Listado de Ordenes"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".DetalleOrdenesActivity"
             android:label="Detalle de Orden"
-            android:parentActivityName=".ListaOrdenesActivity">
+            android:parentActivityName=".ListaOrdenesActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ListaOrdenesActivity" />
         </activity>
         <activity
             android:name=".LiquidarOrdenActivity"
-            android:label="Liquidar Orden"></activity>
+            android:label="Liquidar Orden"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".RechazarOrdenActivity"
-            android:label="Rechazar Orden"></activity>
+            android:label="Rechazar Orden"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".AddMaterialLiquidarActivity"
-            android:label="Agregar Material"></activity>
+            android:label="Agregar Material"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Mapa_Ordenes"
-            android:label="Mapa Ordenes"></activity>
+            android:label="Mapa Ordenes"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".StockUsuarioActivity"
-            android:label="Stock Materiales"></activity>
+            android:label="Stock Materiales"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".CambioContrasenaActivity"
-            android:label="Cambio Contrasena"></activity>
+            android:label="Cambio Contrasena"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

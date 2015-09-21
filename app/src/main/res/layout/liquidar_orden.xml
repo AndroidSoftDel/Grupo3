@@ -44,6 +44,7 @@
                         android:ellipsize="end"
                         android:hint="@string/liquidar_orden_id"
                         android:singleLine="true"
+                        android:gravity="center"
                         android:textSize="14sp"
                         android:textStyle="normal" />
                 </android.support.design.widget.TextInputLayout>
@@ -68,6 +69,7 @@
                         android:ellipsize="end"
                         android:hint="@string/liquidar_orden_telefono"
                         android:singleLine="true"
+                        android:gravity="center"
                         android:textSize="14sp"
                         android:textStyle="normal" />
                 </android.support.design.widget.TextInputLayout>
@@ -146,12 +148,44 @@
                 android:gravity="center"
                 android:text="@string/subtitulo_cantidad"
                 android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/subtitulo_del"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvMaterialesLiquidar"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+    </LinearLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#000000" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Total Item's:"/>
+        <TextView
+            android:id="@+id/lblTotalItemAgregados_Liquidar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:text="0"
+            android:gravity="center"/>
     </LinearLayout>
 
     <LinearLayout

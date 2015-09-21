@@ -18,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.javierhuinocana.grupo03_cibertec.adap_recyclerview.DrawerItemCustomAdapter;
@@ -60,7 +59,6 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
 
     private DataBaseHelper dataBaseHelper;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +91,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
 
         drawerItem[0] = new ObjectDrawerItem(R.drawable.user_white, preferences.getString("nombreUsuario", "").toString());
         drawerItem[1] = new ObjectDrawerItem(R.drawable.change_password_white, "Cambiar Contraseña");
-        drawerItem[2] = new ObjectDrawerItem(R.drawable.stock_white, "Ver Stock");
+        drawerItem[2] = new ObjectDrawerItem(R.drawable.stock_white , "Ver Stock");
         drawerItem[3] = new ObjectDrawerItem(R.drawable.close_white, "Cerrar Sesion");
 
 
@@ -288,7 +286,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         Intent intent = new Intent(ListaOrdenesActivity.this, DetalleOrdenesActivity.class);
         intent.putExtra(ARG_ORDEN, listaOrdenes);
         intent.putExtra(ARG_POSITION, position);
-        startActivityForResult(intent, Code_Respuesta);
+        startActivityForResult(intent,Code_Respuesta);
         //startActivityForResult(intent, REQUEST_CODE_EDITAR);
         //Toast.makeText(ListaOrdenesActivity.this, listaOrdenes.getOrden(), Toast.LENGTH_SHORT).show();
     }
@@ -323,8 +321,8 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         public void onClick(DialogInterface dialogInterface, int i) {
             SharedPreferences settings = getSharedPreferences("Usuario", Context.MODE_PRIVATE);
             settings.edit().clear().commit();
-            Intent intent = new Intent(ListaOrdenesActivity.this, MainActivity.class);
-            finish();
+            Intent intent = new Intent(ListaOrdenesActivity.this, LoginActivity.class);
+                finish();
 
             startActivity(intent);
             dialogInterface.dismiss();
