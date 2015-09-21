@@ -21,6 +21,8 @@ import com.example.javierhuinocana.grupo03_cibertec.entities.ListaOrdenes;
 import com.example.javierhuinocana.grupo03_cibertec.entities.OrdenMaterial;
 import com.example.javierhuinocana.grupo03_cibertec.entities.StockMaterial;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,9 +30,10 @@ import java.util.Calendar;
 /**
  * Created by Javier Huiñocana on 08/09/2015.
  */
-public class LiquidarOrdenActivity extends AppCompatActivity {
+public class LiquidarOrdenActivity extends AppCompatActivity implements RVMaterialesLiquidarAdpater.RVListadoAdapterCallBack {
 
     EditText txtOrden, txtTelefono, txtAtendio, txtDni, txtObservaciones;
+    TextView lblTotalItemAgregados_Liquidar;
     ListaOrdenes listaOrdenes;
     ArrayList<StockMaterial> listaStock;
     //agregar nueva repo
@@ -53,6 +56,7 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
         btnCancelar_Liquidar = (Button) findViewById(R.id.btnCancelar_Liquidar);
         tilOrden_Liquidar = (TextInputLayout) findViewById(R.id.tilOrden_Liquidar);
         tilTelefono_Liquidar = (TextInputLayout) findViewById(R.id.tilTelefono_Liquidar);
+        lblTotalItemAgregados_Liquidar=(TextView)findViewById(R.id.lblTotalItemAgregados_Liquidar);
 
         btnLiquidarOrden_Liquidar.setOnClickListener(btnLiquidarOrden_LiquidarOnClickListener);
         btnCancelar_Liquidar.setOnClickListener(btnCancelar_LiquidarOnClickListener);
@@ -79,7 +83,7 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
         tilNombre_Liquidar.requestFocus();
 
         listaStock = new ArrayList<StockMaterial>();
-        RVAdaptador = new RVMaterialesLiquidarAdpater(new ArrayList<StockMaterial>());
+        RVAdaptador = new RVMaterialesLiquidarAdpater(LiquidarOrdenActivity.this, new ArrayList<StockMaterial>());
         RVListaMaterialesAgregados.setAdapter(RVAdaptador);
     }
 
@@ -96,20 +100,13 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
                     RVAdaptador.addItem(Temp.get(i));
                     listaStock.add(Temp.get(i));
                 }
+
+                lblTotalItemAgregados_Liquidar.setText(String.valueOf(listaStock.size()));
                 RVAdaptador.notifyDataSetChanged();
             }
         }
 
     }
-
-    /******************************************************************************************************************************/
-    View.OnClickListener btnLiquidarOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Toast.makeText(LiquidarOrdenActivity.this, "Se Liquidó Orden", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-    };
 
     /******************************************************************************************************************************/
 
@@ -207,9 +204,9 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
             long rc = listadoDAO.LiquidarOrden(listaOrdenes, DataMaterialesGuardar);
             if (rc == 0) {
                 Toast.makeText(LiquidarOrdenActivity.this, "No se liquidó Orden", Toast.LENGTH_SHORT).show();
-            }else{
+            } else {
                 Intent intent = new Intent();
-                setResult(RESULT_OK,intent);
+                setResult(RESULT_OK, intent);
                 finish();
 
             }
@@ -222,8 +219,24 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(LiquidarOrdenActivity.this, "Liquidacion cancelada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LiquidarOrdenActivity.this, "Acción cancelada", Toast.LENGTH_SHORT).show();
             finish();
         }
     };
+
+    @Override
+    public void onListadoClick(StockMaterial SM, int position) {
+        int i = 0;
+        while (i < listaStock.size()) {
+            if (listaStock.get(i).getIdMaterial() == SM.getIdMaterial()) {
+                listaStock.remove(i);
+                break;
+            }
+            i++;
+        }
+
+        lblTotalItemAgregados_Liquidar.setText(String.valueOf(listaStock.size()));
+        RVAdaptador.deleteItem(position);
+        RVAdaptador.notifyDataSetChanged();
+    }
 }

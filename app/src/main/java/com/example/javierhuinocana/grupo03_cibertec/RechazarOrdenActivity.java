@@ -112,6 +112,8 @@ public class RechazarOrdenActivity extends AppCompatActivity {
     View.OnClickListener btnCancelar_RechazarOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
+            Toast.makeText(RechazarOrdenActivity.this, "Acción cancelada", Toast.LENGTH_SHORT).show();
             finish();
         }
     };

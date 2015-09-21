@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/logoCDO"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo_cdo" />
+
+    <TextView
+        android:id="@+id/lblUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logoCDO"
+        android:text="@string/Usuario_login" />
+
+    <EditText
+        android:id="@+id/txtUsuario"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lblUsuario"
+        android:drawableRight="@drawable/user_16"
+        android:maxLength="15"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/lblPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtUsuario"
+        android:layout_marginTop="20dp"
+        android:text="@string/Password_login" />
+
+    <EditText
+        android:id="@+id/txtPassword"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lblPassword"
+        android:drawableRight="@drawable/key"
+        android:inputType="textPassword"
+        android:maxLength="15"
+        android:singleLine="true" />
+
+    <Button
+        android:id="@+id/btnIngresar"
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:layout_below="@id/txtPassword"
+        android:layout_marginTop="20dp"
+        android:drawableTop="@drawable/login"
+        android:gravity="bottom|center"
+        android:text="@string/Ingresar_login" />
+</RelativeLayout>

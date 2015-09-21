@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login);
 
         txtUsuario = (EditText) findViewById(R.id.txtUsuario);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (preferencias.contains("nombreUsuario")) {
-            Toast.makeText(LoginActivity.this, "Bienvenido " + preferencias.getString("nombreUsuario", "").toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, getResources().getString(R.string.Bienvenido) + " " + preferencias.getString("nombreUsuario", "").toString(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, ListaOrdenesActivity.class);
             startActivity(intent);
             finish();
@@ -55,17 +55,16 @@ public class LoginActivity extends AppCompatActivity {
                 Usuario user;
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-                if(txtUsuario.getText().toString().trim().length()<=0 || txtPassword.getText().toString().trim().length() <=0)
-                {
-                    new AlertDialog.Builder(LoginActivity.this).setTitle("Login").setMessage("Ingrese usuario y contraseña").
-                            setNeutralButton("Aceptar", alertSingleOnClickListener).setCancelable(false).show();
+                if (txtUsuario.getText().toString().trim().length() <= 0 || txtPassword.getText().toString().trim().length() <= 0) {
+                    new AlertDialog.Builder(LoginActivity.this).setTitle(getResources().getString(R.string.LoginTitulo_login)).setMessage(getResources().getString(R.string.Ingrese_Usuario_Contrasenia)).
+                            setNeutralButton(getResources().getString(R.string.Aceptar_login), alertSingleOnClickListener).setCancelable(false).show();
                     return;
                 }
                 //consulta a base de datos
                 user = usuarioDAO.obtenerUsuario(txtUsuario.getText().toString().trim().toLowerCase(), txtPassword.getText().toString().trim().toLowerCase());
 
                 if (user != null) {
-                    Toast.makeText(LoginActivity.this, "Bienvenido " + user.getNombres(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.Bienvenido) + " " + user.getNombres(), Toast.LENGTH_SHORT).show();
                     //guardando nombre de usuario en shared preferences
                     SharedPreferences.Editor editor = preferencias.edit();
                     editor.putString("IdUsuario", String.valueOf(user.getIdUsuario()));
@@ -77,8 +76,8 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    new AlertDialog.Builder(LoginActivity.this).setTitle("Login").setMessage("Usuario o contraseña incorrecta").
-                            setNeutralButton("Aceptar", alertSingleOnClickListener).setCancelable(false).show();
+                    new AlertDialog.Builder(LoginActivity.this).setTitle(getResources().getString(R.string.LoginTitulo_login)).setMessage(getResources().getString(R.string.Usuario_Contrasenia_Icorrecta_login)).
+                            setNeutralButton(getResources().getString(R.string.Aceptar_login), alertSingleOnClickListener).setCancelable(false).show();
                     txtUsuario.setText("");
                     txtPassword.setText("");
                     txtUsuario.setFocusable(true);

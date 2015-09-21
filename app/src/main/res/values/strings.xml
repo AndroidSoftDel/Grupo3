@@ -10,6 +10,11 @@
     <string name="Password_login">Password:</string>
     <string name="Ingresar_login">INGRESAR</string>
     <string name="app_name">CDO Movistar - COBRA PERU</string>
+    <string name="Bienvenido">Bienvenido</string>
+    <string name="LoginTitulo_login">Iniciar Sesión</string>
+    <string name="Ingrese_Usuario_Contrasenia">Ingrese Usuario y Contraseña</string>
+    <string name="Usuario_Contrasenia_Icorrecta_login">User and password incorrect</string>
+    <string name="Aceptar_login">Aceptar</string>
 
     <!--Action Bar: MENU-->
     <string name="verMapa">Ver Mapa</string>
