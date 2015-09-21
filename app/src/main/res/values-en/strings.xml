@@ -1,0 +1,70 @@
+<resources>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <!--LAYOUT: RECHAZAR_ORDEN.XML-->
+    <string name="rechazar_orden_rechazar">Rechazar</string>
+
+
+
+    <!--LAYOUT: MAIN_LOGIN.XML-->
+    <string name="Usuario_login">User:</string>
+    <string name="Password_login">Password:</string>
+    <string name="Ingresar_login">ACCEPT</string>
+    <string name="app_name">CDO Movistar - COBRA PERU</string>
+
+    <!--Action Bar: MENU-->
+    <string name="verMapa">See Map</string>
+    <string name="add_mat">Add Mat</string>
+
+    <!--Action Bar: MENU STOCK-->
+    <string name="vermenu">Ver Menu</string>
+
+    <!--LAYOUT: LISTA_ORDENES.XML-->
+    <string name="filtrar">Filter:</string>
+
+    <!--LAYOUT: DETALLE_ORDEN.XML-->
+    <string name="zonal_detalle">Zonal:</string>
+    <string name="negocio_detalle">Business:</string>
+    <string name="actividad_detalle">Activity:</string>
+    <string name="orden_detalle">Order:</string>
+    <string name="telefono_detalle">Phone:</string>
+    <string name="fecha_registro_detalle">Registration.D:</string>
+    <string name="cliente_detalle">Client:</string>
+    <string name="direccion_detalle">Address:</string>
+    <string name="mapa_detalle">MAP</string>
+    <string name="liquidar_detalle">SETTLE:</string>
+    <string name="rechazar_detalle">REJECT</string>
+
+    <!--LAYOUT: LIQUIDAR_ORDEN.XML-->
+    <string name="liquidar_orden_id">Orden:</string>
+    <string name="liquidar_orden_telefono">Teléfono:</string>
+    <string name="datos_orden_liquidar"><u>DATOS DE ORDEN A LIQUIDAR</u></string>
+    <string name="datos_orden_rechazar"><u>DATOS DE ORDEN A RECHAZAR</u></string>
+    <string name="liquidar_orden_nombre">Nombre Cliente</string>
+    <string name="liquidar_orden_dni">DNI</string>
+    <string name="liquidar_orden_observaciones">Observaciones</string>
+    <string name="liquidar_orden_liquidar">Liquidar</string>
+    <string name="liquidar_orden_cancelar">Cancelar</string>
+
+    <string name="subtitulo_descripcion"><u>Descripción</u></string>
+    <string name="subtitulo_cantidad"><u>Cantidad</u></string>
+
+    <string name="liquidar_orden_agregar_materiales">Agregar Materiales</string>
+    <string name="liquidar_orden_materiales">Materiales</string>
+
+    <!--Cammbio de clave -->
+    <string name="usuario_cambioClave">Usuario</string>
+    <string name="antigua_clave_cambioClave">Contraseña actual</string>
+    <string name="nueva_clave_cambioClave">Contraseña nueva</string>
+    <string name="nuevaclave2_cambioClave">Reingrese nueva contraseña</string>
+    <string name="btnCambiarClave">Cambiar clave</string>
+
+    <string-array name="navigation_drawer_items_array">
+        <item>Cambiar Contraseña</item>
+        <item>Ver Stock</item>
+        <item>Cerrar Sesion</item>
+    </string-array>
+    <string name="drawer_open">Ver menu</string>
+    <string name="drawer_close">Cerrar Menu</string>
+</resources>
