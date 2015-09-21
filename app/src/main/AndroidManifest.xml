@@ -27,7 +27,7 @@
             android:value="AIzaSyDsKJaJewI1TkVzMSxBHyThDmP0RQk6KNg" />
 
         <activity android:name=".EscogerIdioma"
-            android:label="Escoger Idioma">
+            android:label="CDO COBRA PERU MOVISTAR">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,14 +44,14 @@
         <activity
             android:name=".ListaOrdenesActivity"
             android:label="Listado de Ordenes"></activity>
-        <activity
+        <activityi
             android:name=".DetalleOrdenesActivity"
             android:label="Detalle de Orden"
             android:parentActivityName=".ListaOrdenesActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ListaOrdenesActivity" />
-        </activity>
+        </activityi>
         <activity
             android:name=".LiquidarOrdenActivity"
             android:label="Liquidar Orden"></activity>
