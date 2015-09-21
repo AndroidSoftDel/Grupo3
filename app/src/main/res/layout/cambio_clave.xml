@@ -91,14 +91,6 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnCambiarClave"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:text="@string/btnCambiarClave" />
-
-        <Button
             android:id="@+id/btnCancelar_cambioclave"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -106,5 +98,12 @@
             android:layout_weight="1"
             android:text="@string/liquidar_orden_cancelar" />
 
+        <Button
+            android:id="@+id/btnCambiarClave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:text="@string/btnCambiarClave" />
     </LinearLayout>
 </LinearLayout>

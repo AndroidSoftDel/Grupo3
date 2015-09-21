@@ -24,6 +24,7 @@ import android.support.v7.widget.RecyclerView;
 import com.example.javierhuinocana.grupo03_cibertec.adap_recyclerview.DrawerItemCustomAdapter;
 import com.example.javierhuinocana.grupo03_cibertec.adap_recyclerview.RVListadoAdapter;
 import com.example.javierhuinocana.grupo03_cibertec.adap_spiner.SpinerAdapter;
+import com.example.javierhuinocana.grupo03_cibertec.dao.DataBaseHelper;
 import com.example.javierhuinocana.grupo03_cibertec.dao.ListadoDAO;
 import com.example.javierhuinocana.grupo03_cibertec.entities.ListaOrdenes;
 import com.example.javierhuinocana.grupo03_cibertec.entities.ObjectDrawerItem;
@@ -57,6 +58,8 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
     private final static int REQUEST_CODE_EDITAR = 2;
     private ArrayList<ListaOrdenes> ListaArray_Pendientes, ListaArray_Liquidadas, ListaArray_Rechazadas;
 
+    private DataBaseHelper dataBaseHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +91,10 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         SharedPreferences preferences = getSharedPreferences("Usuario", Context.MODE_PRIVATE);
 
 
-        drawerItem[0] = new ObjectDrawerItem(R.drawable.ic_action_ai_back, preferences.getString("nombreUsuario", "").toString());
-        drawerItem[1] = new ObjectDrawerItem(R.drawable.ic_action_ai_settings, "Cambiar Contraseña");
-        drawerItem[2] = new ObjectDrawerItem(R.drawable.ic_action_ai_storage, "Ver Stock");
-        drawerItem[3] = new ObjectDrawerItem(R.drawable.ic_action_ai_back, "Cerrar Sesion");
+        drawerItem[0] = new ObjectDrawerItem(R.drawable.user_white, preferences.getString("nombreUsuario", "").toString());
+        drawerItem[1] = new ObjectDrawerItem(R.drawable.change_password_white, "Cambiar Contraseña");
+        drawerItem[2] = new ObjectDrawerItem(R.drawable.stock_white , "Ver Stock");
+        drawerItem[3] = new ObjectDrawerItem(R.drawable.close_white, "Cerrar Sesion");
 
 
         mNavigationDrawerItemTitles = getResources().getStringArray(R.array.navigation_drawer_items_array);
@@ -177,7 +180,9 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
                     break;
                 //cerrar sesion
                 case 3:
-                    new AlertDialog.Builder(ListaOrdenesActivity.this).setTitle("Cerrar Sesion").setMessage("¿Desea cerrar sesion?").setNegativeButton("Cancelar", alertAcceptCancelCancelOnClickListener).setPositiveButton("Aceptar", alertAcceptCancelAcceptOnClickListener).setCancelable(false).show();
+                    new AlertDialog.Builder(ListaOrdenesActivity.this).setTitle("Cerrar Sesion").setMessage("¿Desea cerrar sesion?")
+                            .setNegativeButton("Cancelar", alertCancelOnClickListener).setPositiveButton("Aceptar", alertAcceptOnClickListener)
+                            .setCancelable(false).show();
                     break;
                 default:
                     break;
@@ -313,22 +318,23 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         }
     }
 
-    DialogInterface.OnClickListener alertAcceptCancelAcceptOnClickListener = new DialogInterface.OnClickListener() {
+    DialogInterface.OnClickListener alertAcceptOnClickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
             SharedPreferences settings = getSharedPreferences("Usuario", Context.MODE_PRIVATE);
             settings.edit().clear().commit();
             Intent intent = new Intent(ListaOrdenesActivity.this, MainActivity.class);
+                finish();
+
             startActivity(intent);
             dialogInterface.dismiss();
         }
     };
 
-    DialogInterface.OnClickListener alertAcceptCancelCancelOnClickListener = new DialogInterface.OnClickListener() {
+    DialogInterface.OnClickListener alertCancelOnClickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
             dialogInterface.dismiss();
-            finish();
         }
     };
 
