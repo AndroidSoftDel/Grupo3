@@ -1,10 +1,14 @@
 package com.example.javierhuinocana.grupo03_cibertec;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,8 +57,8 @@ public class StockUsuarioActivity extends AppCompatActivity implements RVStockUs
 
         ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[2];
 
-        drawerItem[0] = new ObjectDrawerItem(R.drawable.ic_action_ai_settings, "Cambiar Contraseña");
-        drawerItem[1] = new ObjectDrawerItem(R.drawable.ic_action_ai_back, "Cerrar Sesion");
+        drawerItem[0] = new ObjectDrawerItem(R.drawable.change_password_white, "Cambiar Contraseña");
+        drawerItem[1] = new ObjectDrawerItem(R.drawable.close_white, "Cerrar Sesion");
 
         mNavigationDrawerItemTitles = getResources().getStringArray(R.array.navigation_drawer_items_array);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -89,19 +93,22 @@ public class StockUsuarioActivity extends AppCompatActivity implements RVStockUs
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+            Intent intent;
             switch (position) {
                 case 0:
+                    intent = new Intent(StockUsuarioActivity.this, CambioContrasenaActivity.class);
+                    startActivity(intent);
                     dlmenustock.closeDrawers();
                     break;
                 case 1:
                     //Intent intent = new Intent(Intent.ACTION_MAIN);
                     //intent.addCategory(Intent.CATEGORY_HOME);
                     //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    Intent intent = new Intent(StockUsuarioActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    new AlertDialog.Builder(StockUsuarioActivity.this).setTitle("Cerrar Sesion").setMessage("¿Desea cerrar sesion?")
+                            .setNegativeButton("Cancelar", alertCancelOnClickListener).setPositiveButton("Aceptar", alertAcceptOnClickListener)
+                            .setCancelable(false).show();
+
                     dlmenustock.closeDrawers();
-                    finish();
                     break;
                 case 2:
                     dlmenustock.closeDrawers();
@@ -151,4 +158,23 @@ public class StockUsuarioActivity extends AppCompatActivity implements RVStockUs
     public boolean onPrepareOptionsMenu(Menu menu) {
         return super.onPrepareOptionsMenu(menu);
     }
+
+    DialogInterface.OnClickListener alertAcceptOnClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            SharedPreferences settings = getSharedPreferences("Usuario", Context.MODE_PRIVATE);
+            settings.edit().clear().commit();
+            Intent intent = new Intent(StockUsuarioActivity.this, MainActivity.class);
+            finish();
+            startActivity(intent);
+            dialogInterface.dismiss();
+        }
+    };
+
+    DialogInterface.OnClickListener alertCancelOnClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            dialogInterface.dismiss();
+        }
+    };
 }
