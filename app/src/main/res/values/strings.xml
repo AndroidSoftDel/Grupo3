@@ -5,8 +5,6 @@
     <!--LAYOUT: RECHAZAR_ORDEN.XML-->
     <string name="rechazar_orden_rechazar">Rechazar</string>
 
-
-
     <!--LAYOUT: MAIN_LOGIN.XML-->
     <string name="Usuario_login">Usuario:</string>
     <string name="Password_login">Password:</string>
@@ -49,6 +47,7 @@
 
     <string name="subtitulo_descripcion"><u>Descripción</u></string>
     <string name="subtitulo_cantidad"><u>Cantidad</u></string>
+    <string name="subtitulo_del"><u>DEL</u></string>
 
     <string name="liquidar_orden_agregar_materiales">Agregar Materiales</string>
     <string name="liquidar_orden_materiales">Materiales</string>

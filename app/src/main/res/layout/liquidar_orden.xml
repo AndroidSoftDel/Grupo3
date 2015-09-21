@@ -44,6 +44,7 @@
                         android:ellipsize="end"
                         android:hint="@string/liquidar_orden_id"
                         android:singleLine="true"
+                        android:gravity="center"
                         android:textSize="14sp"
                         android:textStyle="normal" />
                 </android.support.design.widget.TextInputLayout>
@@ -68,6 +69,7 @@
                         android:ellipsize="end"
                         android:hint="@string/liquidar_orden_telefono"
                         android:singleLine="true"
+                        android:gravity="center"
                         android:textSize="14sp"
                         android:textStyle="normal" />
                 </android.support.design.widget.TextInputLayout>
@@ -145,6 +147,14 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/subtitulo_cantidad"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/subtitulo_del"
                 android:textStyle="bold" />
         </LinearLayout>
 

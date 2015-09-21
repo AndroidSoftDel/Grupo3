@@ -60,7 +60,6 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
 
     private DataBaseHelper dataBaseHelper;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
