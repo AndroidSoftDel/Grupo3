@@ -18,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.javierhuinocana.grupo03_cibertec.adap_recyclerview.DrawerItemCustomAdapter;
@@ -322,7 +321,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         public void onClick(DialogInterface dialogInterface, int i) {
             SharedPreferences settings = getSharedPreferences("Usuario", Context.MODE_PRIVATE);
             settings.edit().clear().commit();
-            Intent intent = new Intent(ListaOrdenesActivity.this, MainActivity.class);
+            Intent intent = new Intent(ListaOrdenesActivity.this, LoginActivity.class);
                 finish();
 
             startActivity(intent);

@@ -100,8 +100,8 @@ public class RechazarOrdenActivity extends AppCompatActivity {
                     Toast.makeText(RechazarOrdenActivity.this, "Orden Rechazada satisfactoriamente", Toast.LENGTH_LONG).show();
 
                 //Intent intent = new Intent();
-                //intent.putExtra(MainActivity.ARG_PERSONA, persona);
-                //intent.putExtra(MainActivity.ARG_POSITION, position);
+                //intent.putExtra(LoginActivity.ARG_PERSONA, persona);
+                //intent.putExtra(LoginActivity.ARG_POSITION, position);
                 //setResult(RESULT_OK, intent);
                 finish();
             }

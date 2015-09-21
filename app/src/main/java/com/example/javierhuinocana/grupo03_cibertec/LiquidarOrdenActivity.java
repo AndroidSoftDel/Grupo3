@@ -213,12 +213,6 @@ public class LiquidarOrdenActivity extends AppCompatActivity {
                 finish();
 
             }
-            //Intent intent = new Intent();
-            //intent.putExtra(MainActivity.ARG_PERSONA, persona);
-            //intent.putExtra(MainActivity.ARG_POSITION, position);
-            //setResult(RESULT_OK, intent);
-
-            //}
         }
     };
 

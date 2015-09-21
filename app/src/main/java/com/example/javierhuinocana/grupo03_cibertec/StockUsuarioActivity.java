@@ -12,17 +12,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.javierhuinocana.grupo03_cibertec.adap_recyclerview.DrawerItemCustomAdapter;
 import com.example.javierhuinocana.grupo03_cibertec.adap_recyclerview.RVStockUsuarioAdapter;
-import com.example.javierhuinocana.grupo03_cibertec.entities.ListaOrdenes;
 import com.example.javierhuinocana.grupo03_cibertec.entities.ObjectDrawerItem;
 import com.example.javierhuinocana.grupo03_cibertec.entities.StockMaterial;
-
-import java.util.ArrayList;
 
 /**
  * Created by JMartinez on 16/09/2015.
@@ -98,7 +94,7 @@ public class StockUsuarioActivity extends AppCompatActivity implements RVStockUs
                     //Intent intent = new Intent(Intent.ACTION_MAIN);
                     //intent.addCategory(Intent.CATEGORY_HOME);
                     //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    Intent intent = new Intent(StockUsuarioActivity.this, MainActivity.class);
+                    Intent intent = new Intent(StockUsuarioActivity.this, LoginActivity.class);
                     startActivity(intent);
                     dlmenustock.closeDrawers();
                     finish();
