@@ -44,14 +44,14 @@
         <activity
             android:name=".ListaOrdenesActivity"
             android:label="Listado de Ordenes"></activity>
-        <activityi
+        <activity
             android:name=".DetalleOrdenesActivity"
             android:label="Detalle de Orden"
             android:parentActivityName=".ListaOrdenesActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ListaOrdenesActivity" />
-        </activityi>
+        </activity>
         <activity
             android:name=".LiquidarOrdenActivity"
             android:label="Liquidar Orden"></activity>
