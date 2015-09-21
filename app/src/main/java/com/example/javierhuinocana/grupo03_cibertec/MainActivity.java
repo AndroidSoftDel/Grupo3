@@ -35,6 +35,15 @@ public class MainActivity extends AppCompatActivity {
         btnIngresar = (Button) findViewById(R.id.btnIngresar);
         final SharedPreferences preferencias = getSharedPreferences("Usuario", MODE_PRIVATE);
 
+        /*CREAMOS Y/O COPIAMOS BD AL CELULAR*/
+        try {
+            dataBaseHelper = new DataBaseHelper(MainActivity.this);
+            dataBaseHelper.createDataBase();
+            dataBaseHelper.openDataBase();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         if (preferencias.contains("nombreUsuario")) {
             Toast.makeText(MainActivity.this, "Bienvenido " + preferencias.getString("nombreUsuario", "").toString(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, ListaOrdenesActivity.class);
@@ -45,20 +54,11 @@ public class MainActivity extends AppCompatActivity {
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 /*CREAMOS Y/O COPIAMOS BD AL CELULAR*/
-                try {
-                    dataBaseHelper = new DataBaseHelper(MainActivity.this);
-                    dataBaseHelper.createDataBase();
-                    dataBaseHelper.openDataBase();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
                 //validar usuario y contraseña
                 Usuario user;
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-                if(txtUsuario.getText().toString().trim().length()<=0 || txtPassword.getText().toString().trim().length() <=0)
-                {
+                if (txtUsuario.getText().toString().trim().length() <= 0 || txtPassword.getText().toString().trim().length() <= 0) {
                     new AlertDialog.Builder(MainActivity.this).setTitle("Login").setMessage("Ingrese usuario y contraseña").
                             setNeutralButton("Aceptar", alertSingleOnClickListener).setCancelable(false).show();
                     return;
