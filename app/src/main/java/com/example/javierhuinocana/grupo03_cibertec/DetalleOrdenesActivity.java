@@ -104,7 +104,7 @@ public class DetalleOrdenesActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_detalle_orden, menu);
 
         if (listaOrdenes.getEstado() == 1) {
-            ArrayList<OrdenMaterial> arrayMateriales = new ListadoDAO().listOrdenMaterial(String.valueOf(listaOrdenes.getIdOrden()));
+            arrayMateriales = new ListadoDAO().listOrdenMaterial(String.valueOf(listaOrdenes.getIdOrden()));
         } else {
             menu.getItem(0).setVisible(false);
         }

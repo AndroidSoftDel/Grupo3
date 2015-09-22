@@ -34,7 +34,7 @@ public class LiquidarOrdenActivity extends AppCompatActivity implements RVMateri
 
     EditText txtOrden, txtTelefono, txtAtendio, txtDni, txtObservaciones;
     TextView lblTotalItemAgregados_Liquidar;
-    ListaOrdenes listaOrdenes;
+    ListaOrdenes mlistaOrdenes;
     ArrayList<StockMaterial> listaStock;
     //agregar nueva repo
     private Button btnLiquidarOrden_Liquidar, btnCancelar_Liquidar;
@@ -69,9 +69,9 @@ public class LiquidarOrdenActivity extends AppCompatActivity implements RVMateri
         RVListaMaterialesAgregados.setLayoutManager(new LinearLayoutManager(LiquidarOrdenActivity.this));
 
         if (getIntent().getExtras() != null && getIntent().getExtras().containsKey(ListaOrdenesActivity.ARG_ORDEN)) {
-            listaOrdenes = getIntent().getParcelableExtra(ListaOrdenesActivity.ARG_ORDEN);
-            tilOrden_Liquidar.getEditText().setText(listaOrdenes.getOrden());
-            tilTelefono_Liquidar.getEditText().setText(listaOrdenes.getTelefono());
+            mlistaOrdenes = getIntent().getParcelableExtra(ListaOrdenesActivity.ARG_ORDEN);
+            tilOrden_Liquidar.getEditText().setText(mlistaOrdenes.getOrden());
+            tilTelefono_Liquidar.getEditText().setText(mlistaOrdenes.getTelefono());
         } else {
             finish();
         }
@@ -145,6 +145,7 @@ public class LiquidarOrdenActivity extends AppCompatActivity implements RVMateri
             //boolean isCorrect = true;
             ListaOrdenes listaOrdenes = new ListaOrdenes();
 
+            listaOrdenes.setIdOrden(mlistaOrdenes.getIdOrden());
             tilNombre_Liquidar.setErrorEnabled(false);
             tilDni_Liquidar.setErrorEnabled(false);
             tilObservaciones_Liquidar.setErrorEnabled(false);
