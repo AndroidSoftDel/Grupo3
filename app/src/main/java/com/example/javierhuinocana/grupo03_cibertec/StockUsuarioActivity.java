@@ -55,10 +55,12 @@ public class StockUsuarioActivity extends AppCompatActivity implements RVStockUs
         rvStockUsuarioAdapter = new RVStockUsuarioAdapter(StockUsuarioActivity.this);
         rvStock.setAdapter(rvStockUsuarioAdapter);
 
-        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[2];
-
-        drawerItem[0] = new ObjectDrawerItem(R.drawable.change_password_white, "Cambiar Contraseña");
-        drawerItem[1] = new ObjectDrawerItem(R.drawable.close_white, "Cerrar Sesion");
+        SharedPreferences preferences = getSharedPreferences("Usuario", Context.MODE_PRIVATE);
+        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[4];
+        drawerItem[0] = new ObjectDrawerItem(R.drawable.user_white, preferences.getString("nombreUsuario", "").toString());
+        drawerItem[1] = new ObjectDrawerItem(R.drawable.change_password_white, "Cambiar Contraseña");
+        drawerItem[2] = new ObjectDrawerItem(R.drawable.stock_white , "Ver Stock");
+        drawerItem[3] = new ObjectDrawerItem(R.drawable.close_white, "Cerrar Sesion");
 
         mNavigationDrawerItemTitles = getResources().getStringArray(R.array.navigation_drawer_items_array);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -96,21 +98,25 @@ public class StockUsuarioActivity extends AppCompatActivity implements RVStockUs
             Intent intent;
             switch (position) {
                 case 0:
-                    intent = new Intent(StockUsuarioActivity.this, CambioContrasenaActivity.class);
-                    startActivity(intent);
-                    dlmenustock.closeDrawers();
+                   //NOMBRE DEL USUARIO
                     break;
                 case 1:
                     //Intent intent = new Intent(Intent.ACTION_MAIN);
                     //intent.addCategory(Intent.CATEGORY_HOME);
                     //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    new AlertDialog.Builder(StockUsuarioActivity.this).setTitle("Cerrar Sesion").setMessage("¿Desea cerrar sesion?")
-                            .setNegativeButton("Cancelar", alertCancelOnClickListener).setPositiveButton("Aceptar", alertAcceptOnClickListener)
-                            .setCancelable(false).show();
-
+                    intent = new Intent(StockUsuarioActivity.this, CambioContrasenaActivity.class);
+                    startActivity(intent);
+                    finish();
                     dlmenustock.closeDrawers();
                     break;
                 case 2:
+                    //STOCKUSUARIO
+                    //dlmenustock.closeDrawers();
+                    break;
+                case 3:
+                    new AlertDialog.Builder(StockUsuarioActivity.this).setTitle("Cerrar Sesion").setMessage("¿Desea cerrar sesion?")
+                            .setNegativeButton("Cancelar", alertCancelOnClickListener).setPositiveButton("Aceptar", alertAcceptOnClickListener)
+                            .setCancelable(false).show();
                     dlmenustock.closeDrawers();
                     break;
                 default:
