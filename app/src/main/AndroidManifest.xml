@@ -46,7 +46,8 @@
         <activity
             android:name=".ListaOrdenesActivity"
             android:label="Listado de Ordenes"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".DetalleOrdenesActivity"
             android:label="Detalle de Orden"
@@ -59,27 +60,39 @@
         <activity
             android:name=".LiquidarOrdenActivity"
             android:label="Liquidar Orden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".RechazarOrdenActivity"
             android:label="Rechazar Orden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".AddMaterialLiquidarActivity"
             android:label="Agregar Material"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".Mapa_Ordenes"
             android:label="Mapa Ordenes"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".StockUsuarioActivity"
             android:label="Stock Materiales"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".CambioContrasenaActivity"
             android:label="Cambio Contrasena"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".DetalleMaterialesLiquidadosActivity"
+            android:label="Detalle Materiales LIQ"
+            android:screenOrientation="portrait">
+        </activity>
+
     </application>
 
 </manifest>

@@ -3,13 +3,18 @@ package com.example.javierhuinocana.grupo03_cibertec;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.javierhuinocana.grupo03_cibertec.dao.ListadoDAO;
 import com.example.javierhuinocana.grupo03_cibertec.entities.ListaOrdenes;
+import com.example.javierhuinocana.grupo03_cibertec.entities.OrdenMaterial;
 
 import java.util.ArrayList;
 
@@ -26,6 +31,9 @@ public class DetalleOrdenesActivity extends AppCompatActivity {
 
     public final int Code_LIQ = 1;
 
+    ArrayList<OrdenMaterial> arrayMateriales = null;
+
+    public static String KEY_ARG = "KEY_ARG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +57,7 @@ public class DetalleOrdenesActivity extends AppCompatActivity {
 
         if (getIntent().getExtras() != null && getIntent().getExtras().containsKey(ListaOrdenesActivity.ARG_ORDEN)) {
             listaOrdenes = getIntent().getParcelableExtra(ListaOrdenesActivity.ARG_ORDEN);
+
             txtZonal.setText(listaOrdenes.getZonal());
             txtNegocio.setText(listaOrdenes.getNegocio());
             txtActividad.setText(listaOrdenes.getActividad());
@@ -89,6 +98,36 @@ public class DetalleOrdenesActivity extends AppCompatActivity {
         txtCliente.setKeyListener(null);
         txtDireccion.setKeyListener(null);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_detalle_orden, menu);
+
+        if (listaOrdenes.getEstado() == 1) {
+            ArrayList<OrdenMaterial> arrayMateriales = new ListadoDAO().listOrdenMaterial(String.valueOf(listaOrdenes.getIdOrden()));
+        } else {
+            menu.getItem(0).setVisible(false);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_ver_materiales) {
+            if (arrayMateriales == null) {
+                Toast.makeText(DetalleOrdenesActivity.this, "Orden no tiene Materiales Liquidados", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent(DetalleOrdenesActivity.this, DetalleMaterialesLiquidadosActivity.class);
+                intent.putExtra(KEY_ARG, arrayMateriales);
+                startActivity(intent);
+            }
+
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     View.OnClickListener btnVerMapaOnClickListener = new View.OnClickListener() {
         @Override
