@@ -206,6 +206,7 @@ public class LiquidarOrdenActivity extends AppCompatActivity implements RVMateri
             if (rc == 0) {
                 Toast.makeText(LiquidarOrdenActivity.this, "No se liquidó Orden", Toast.LENGTH_SHORT).show();
             } else {
+                Toast.makeText(LiquidarOrdenActivity.this, "Orden Liquidada", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent();
                 setResult(RESULT_OK, intent);
                 finish();

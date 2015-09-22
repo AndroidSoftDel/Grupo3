@@ -55,12 +55,13 @@ public class ListadoDAO {
     }
 
     public ArrayList<OrdenMaterial> listOrdenMaterial(String IdOrden) {
-        ArrayList<OrdenMaterial> lstOrdenMaterial = new ArrayList<>();
+        ArrayList<OrdenMaterial> lstOrdenMaterial = null;
         Cursor cursor = null;
 
         try {
             cursor = DataBaseHelper.myDataBase.query("OrdenMaterial", null, "IdOrden=? ", new String[]{IdOrden}, null, null, null);
             if (cursor.moveToFirst()) {
+                lstOrdenMaterial = new ArrayList<OrdenMaterial>();
                 do {
                     OrdenMaterial ordenMaterial = new OrdenMaterial();
                     ordenMaterial.setIdOrden(cursor.isNull(cursor.getColumnIndex("IdOrden")) ? 0 : cursor.getInt(cursor.getColumnIndex("IdOrden")));

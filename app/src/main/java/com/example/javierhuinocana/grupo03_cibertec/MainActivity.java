@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
         /*PREGUNTAMOS SI YA SE ESCOGIÓ IDIOMA*/
         if (preferencias.contains("IDIOMA")) {
+            /*CAMBIAMOS A LA CONFIGURACION QUE HAYA ESCOGIDO EL USUARIO*/
+            ConfigurarIdiomaAplicacion(new Locale(preferencias.getString("IDIOMA", "").toString()));
+
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             finish();
         }
@@ -43,7 +46,12 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            OpcionSeleccionada(new Locale("es"), "ESPANIOL");
+            ConfigurarIdiomaAplicacion(new Locale("es"));
+            GuardarIdiomaSeleccionada("es");
+
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
     };
 
@@ -52,24 +60,25 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            OpcionSeleccionada(new Locale("en"), "INGLES");
+            ConfigurarIdiomaAplicacion(new Locale("en"));
+            GuardarIdiomaSeleccionada("en");
+
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
     };
 
-    public void OpcionSeleccionada(Locale locale, String Dato) {
-        SharedPreferences.Editor editor = preferencias.edit();
-        editor.putString("IDIOMA", Dato);
-        editor.commit();
-
+    public void ConfigurarIdiomaAplicacion(Locale locale) {
         Locale.setDefault(locale);
         Configuration config = new Configuration();
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
     }
 
-
+    public void GuardarIdiomaSeleccionada(String Dato) {
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putString("IDIOMA", Dato);
+        editor.commit();
+    }
 }

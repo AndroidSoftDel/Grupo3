@@ -97,7 +97,7 @@ public class RechazarOrdenActivity extends AppCompatActivity {
                 ListadoDAO listadoDAO = new ListadoDAO();
                 long rc = listadoDAO.updateListado(listaOrdenes);
                 if (rc == 1)
-                    Toast.makeText(RechazarOrdenActivity.this, "Orden Rechazada satisfactoriamente", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RechazarOrdenActivity.this, "Orden Rechazada", Toast.LENGTH_LONG).show();
 
                 //Intent intent = new Intent();
                 //intent.putExtra(LoginActivity.ARG_PERSONA, persona);
