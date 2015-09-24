@@ -86,7 +86,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
 
         cboFiltrar.setOnItemSelectedListener(cboFiltrarOnItemSelectedListener);
 
-        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[4];
+        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[5];
 
         SharedPreferences preferences = getSharedPreferences("Usuario", Context.MODE_PRIVATE);
 
@@ -95,6 +95,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         drawerItem[1] = new ObjectDrawerItem(R.drawable.change_password_white, "Cambiar Contraseña");
         drawerItem[2] = new ObjectDrawerItem(R.drawable.stock_white , "Ver Stock");
         drawerItem[3] = new ObjectDrawerItem(R.drawable.close_white, "Cerrar Sesion");
+        drawerItem[4] = new ObjectDrawerItem(R.drawable.ic_language_white_36dp, "Cambiar Idioma");
 
 
         mNavigationDrawerItemTitles = getResources().getStringArray(R.array.navigation_drawer_items_array);
@@ -181,7 +182,13 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
                 //cerrar sesion
                 case 3:
                     new AlertDialog.Builder(ListaOrdenesActivity.this).setTitle("Cerrar Sesion").setMessage("¿Desea cerrar sesion?")
-                            .setNegativeButton("Cancelar", null).setPositiveButton("Aceptar", alertAcceptOnClickListener)
+                            .setNegativeButton("Cancelar", null).setPositiveButton("Aceptar", alertAcceptCerrarSesionOnClickListener)
+                            .setCancelable(false).show();
+                    break;
+                //cambiar idioma
+                case 4:
+                    new AlertDialog.Builder(ListaOrdenesActivity.this).setTitle("Cerrar Sesion").setMessage("¿Desea cerrar sesion?")
+                            .setNegativeButton("Cancelar", null).setPositiveButton("Aceptar", alertAcceptCambiarIdiomaOnClickListener)
                             .setCancelable(false).show();
                     break;
                 default:
@@ -318,7 +325,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         }
     }
 
-    DialogInterface.OnClickListener alertAcceptOnClickListener = new DialogInterface.OnClickListener() {
+    DialogInterface.OnClickListener alertAcceptCerrarSesionOnClickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
             dialogInterface.dismiss();
@@ -335,4 +342,23 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
             startActivity(mainIntent);
         }
     };
+
+
+    DialogInterface.OnClickListener alertAcceptCambiarIdiomaOnClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            dialogInterface.dismiss();
+            //se elimina el idioma guardado en las preferencias
+            SharedPreferences preferencias = getSharedPreferences("Usuario", MODE_PRIVATE);
+            preferencias.edit().remove("IDIOMA").commit();
+
+            /*CODIGO PARA CERRAR TODAS LAS ACTIVITYS*/
+            Intent intent = new Intent(ListaOrdenesActivity.this, MainActivity.class);
+            ComponentName cn = intent.getComponent();
+            Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+            startActivity(mainIntent);
+        }
+    };
+
+
 }
