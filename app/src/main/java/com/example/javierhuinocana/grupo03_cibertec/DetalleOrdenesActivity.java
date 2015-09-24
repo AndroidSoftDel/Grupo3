@@ -29,7 +29,7 @@ public class DetalleOrdenesActivity extends AppCompatActivity {
     TextView tvFechaModicicacion_Detalle;
     LinearLayout lyFechaModificacion_Detalle;
 
-    public final int Code_LIQ = 1;
+    public final int Code_LIQ = 1, Code_REC = 2;
 
     ArrayList<OrdenMaterial> arrayMateriales = null;
 
@@ -148,24 +148,28 @@ public class DetalleOrdenesActivity extends AppCompatActivity {
         }
     };
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == Code_LIQ && resultCode == RESULT_OK) {
-            Intent intent = new Intent();
-            setResult(RESULT_OK, intent);
-            finish();
-        }
-
-    }
-
     View.OnClickListener btnRechazarOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(DetalleOrdenesActivity.this, RechazarOrdenActivity.class);
             intent.putExtra(ListaOrdenesActivity.ARG_ORDEN, listaOrdenes);
-            startActivity(intent);
+            startActivityForResult(intent, Code_REC);
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == Code_LIQ && resultCode == RESULT_OK) {
+            setResult(RESULT_OK, new Intent());
+            finish();
+        } else if (requestCode == Code_REC && resultCode == RESULT_OK) {
+            setResult(RESULT_OK, new Intent());
+            finish();
+        }
+
+    }
+
+
 }

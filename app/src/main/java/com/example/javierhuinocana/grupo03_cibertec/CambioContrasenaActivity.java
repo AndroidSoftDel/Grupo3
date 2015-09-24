@@ -35,15 +35,14 @@ public class CambioContrasenaActivity extends AppCompatActivity {
         tilNuevaClave_cambioClave = (TextInputLayout) findViewById(R.id.tilNuevaClave_cambioClave);
         tilNuevaClave2_cambioClave = (TextInputLayout) findViewById(R.id.tilNuevaClave2_cambioClave);
 
-        tilUsuario_cambioClave.getEditText().setText(preferences.getString("nickUsuario", "").toString());
+        tilUsuario_cambioClave.getEditText().setText(preferences.getString("nickUsuario", ""));
         tilUsuario_cambioClave.getEditText().setKeyListener(null);
 
         btnCambiarClave = (Button) findViewById(R.id.btnCambiarClave);
         btnCancelar_cambioclave = (Button) findViewById(R.id.btnCancelar_cambioclave);
         tilAntiguaClave_cambioClave.getEditText().requestFocus();
         btnCambiarClave.setOnClickListener(btnCambiarClavesetOnClickListener);
-
-
+        btnCancelar_cambioclave.setOnClickListener(btnCancelar_cambioclaveOnClickListener);
     }
 
     View.OnClickListener btnCambiarClavesetOnClickListener = new View.OnClickListener() {
@@ -74,7 +73,7 @@ public class CambioContrasenaActivity extends AppCompatActivity {
             user = usuarioDAO.obtenerUsuario(preferences.getString("nickUsuario", "").toString().trim().toLowerCase(),
                     tilAntiguaClave_cambioClave.getEditText().getText().toString().trim().toLowerCase());
 
-                        //validar usuario y contraseña
+            //validar usuario y contraseña
             if (user != null) {
                 //validar que las nuevas claves coincidan
                 if (tilNuevaClave_cambioClave.getEditText().getText().toString().trim().toLowerCase().
@@ -101,7 +100,7 @@ public class CambioContrasenaActivity extends AppCompatActivity {
             else {
 
                 new AlertDialog.Builder(CambioContrasenaActivity.this).setTitle("Cambio de Contraseña").setMessage("Usuario o contraseña incorrecta"
-                        + " user: "+preferences.getString("nickUsuario", "").toString().trim().toLowerCase()+ " pass: "+
+                        + " user: " + preferences.getString("nickUsuario", "").toString().trim().toLowerCase() + " pass: " +
                         tilAntiguaClave_cambioClave.getEditText().getText().toString().trim().toLowerCase()).
                         setNeutralButton("Aceptar", alertSingleOnClickListener).setCancelable(false).show();
 
@@ -111,6 +110,14 @@ public class CambioContrasenaActivity extends AppCompatActivity {
                 tilUsuario_cambioClave.getEditText().requestFocus();
             }
 
+        }
+    };
+
+    View.OnClickListener btnCancelar_cambioclaveOnClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            finish();
         }
     };
 

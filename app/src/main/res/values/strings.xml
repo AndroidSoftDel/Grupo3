@@ -13,7 +13,7 @@
     <string name="Bienvenido">Bienvenido</string>
     <string name="LoginTitulo_login">Iniciar Sesión</string>
     <string name="Ingrese_Usuario_Contrasenia">Ingrese Usuario y Contraseña</string>
-    <string name="Usuario_Contrasenia_Icorrecta_login">User and password incorrect</string>
+    <string name="Usuario_Contrasenia_Icorrecta_login">Usuario y Contraseña Incorrectos</string>
     <string name="Aceptar_login">Aceptar</string>
 
     <!--Action Bar: MENU-->

@@ -1,5 +1,6 @@
 package com.example.javierhuinocana.grupo03_cibertec;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -50,6 +51,10 @@ public class RechazarOrdenActivity extends AppCompatActivity {
             tilOrden_Rechazar.getEditText().setText(listaOrdenes.getOrden());
             tilTelefono_Rechazar.getEditText().setText(listaOrdenes.getTelefono());
         }
+
+        tilOrden_Rechazar.getEditText().setKeyListener(null);
+        tilTelefono_Rechazar.getEditText().setKeyListener(null);
+        tilNombre_Rechazar.getEditText().requestFocus();
     }
 
     View.OnClickListener btnRechazarOrden_RechazarOnClickListener = new View.OnClickListener() {
@@ -96,14 +101,11 @@ public class RechazarOrdenActivity extends AppCompatActivity {
 
                 ListadoDAO listadoDAO = new ListadoDAO();
                 long rc = listadoDAO.updateListado(listaOrdenes);
-                if (rc == 1)
+                if (rc == 1) {
                     Toast.makeText(RechazarOrdenActivity.this, "Orden Rechazada", Toast.LENGTH_LONG).show();
-
-                //Intent intent = new Intent();
-                //intent.putExtra(LoginActivity.ARG_PERSONA, persona);
-                //intent.putExtra(LoginActivity.ARG_POSITION, position);
-                //setResult(RESULT_OK, intent);
-                finish();
+                    setResult(RESULT_OK, new Intent());
+                    finish();
+                }
             }
 
 

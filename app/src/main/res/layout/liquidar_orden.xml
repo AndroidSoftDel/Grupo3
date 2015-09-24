@@ -91,6 +91,7 @@
                 android:hint="@string/liquidar_orden_nombre"
                 android:singleLine="true"
                 android:textSize="14sp"
+                android:maxLength="60"
                 android:textStyle="normal" />
         </android.support.design.widget.TextInputLayout>
 
@@ -125,6 +126,7 @@
                 android:hint="@string/liquidar_orden_observaciones"
                 android:singleLine="false"
                 android:textSize="14sp"
+                android:maxLength="150"
                 android:textStyle="normal" />
         </android.support.design.widget.TextInputLayout>
 

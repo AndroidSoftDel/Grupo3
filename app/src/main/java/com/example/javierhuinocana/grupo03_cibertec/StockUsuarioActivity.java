@@ -1,11 +1,13 @@
 package com.example.javierhuinocana.grupo03_cibertec;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.content.IntentCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -59,7 +61,7 @@ public class StockUsuarioActivity extends AppCompatActivity implements RVStockUs
         ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[4];
         drawerItem[0] = new ObjectDrawerItem(R.drawable.user_white, preferences.getString("nombreUsuario", "").toString());
         drawerItem[1] = new ObjectDrawerItem(R.drawable.change_password_white, "Cambiar Contraseña");
-        drawerItem[2] = new ObjectDrawerItem(R.drawable.stock_white , "Ver Stock");
+        drawerItem[2] = new ObjectDrawerItem(R.drawable.stock_white, "Ver Stock");
         drawerItem[3] = new ObjectDrawerItem(R.drawable.close_white, "Cerrar Sesion");
 
         mNavigationDrawerItemTitles = getResources().getStringArray(R.array.navigation_drawer_items_array);
@@ -75,14 +77,12 @@ public class StockUsuarioActivity extends AppCompatActivity implements RVStockUs
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
                 invalidateOptionsMenu();
-                Toast.makeText(StockUsuarioActivity.this, "Closed", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 invalidateOptionsMenu();
-                Toast.makeText(StockUsuarioActivity.this, "Opened", Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -98,24 +98,22 @@ public class StockUsuarioActivity extends AppCompatActivity implements RVStockUs
             Intent intent;
             switch (position) {
                 case 0:
-                   //NOMBRE DEL USUARIO
+                    /*NOMBRE DEL USUARIO*/
                     break;
                 case 1:
-                    //Intent intent = new Intent(Intent.ACTION_MAIN);
-                    //intent.addCategory(Intent.CATEGORY_HOME);
-                    //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    /*CAMBIO DE CONTRASEÑA*/
                     intent = new Intent(StockUsuarioActivity.this, CambioContrasenaActivity.class);
                     startActivity(intent);
                     finish();
                     dlmenustock.closeDrawers();
                     break;
                 case 2:
-                    //STOCKUSUARIO
+                    /*STOCK USUARIO*/
                     //dlmenustock.closeDrawers();
                     break;
                 case 3:
                     new AlertDialog.Builder(StockUsuarioActivity.this).setTitle("Cerrar Sesion").setMessage("¿Desea cerrar sesion?")
-                            .setNegativeButton("Cancelar", alertCancelOnClickListener).setPositiveButton("Aceptar", alertAcceptOnClickListener)
+                            .setNegativeButton("Cancelar", null).setPositiveButton("Aceptar", alertAcceptOnClickListener)
                             .setCancelable(false).show();
                     dlmenustock.closeDrawers();
                     break;
@@ -168,19 +166,25 @@ public class StockUsuarioActivity extends AppCompatActivity implements RVStockUs
     DialogInterface.OnClickListener alertAcceptOnClickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
-            SharedPreferences settings = getSharedPreferences("Usuario", Context.MODE_PRIVATE);
-            settings.edit().clear().commit();
-            Intent intent = new Intent(StockUsuarioActivity.this, MainActivity.class);
-            finish();
-            startActivity(intent);
             dialogInterface.dismiss();
+            SharedPreferences settings = getSharedPreferences("Usuario", Context.MODE_PRIVATE);
+            /*BORRAMOS SOLO IDUSUARIO,NOMBREUSUARIO,NICKUSUARIO*/
+            settings.edit().remove("IdUsuario").commit();
+            settings.edit().remove("nombreUsuario").commit();
+            settings.edit().remove("nickUsuario").commit();
+
+            /*CODIGO PARA CERRAR TODAS LAS ACTIVITYS*/
+            Intent intent = new Intent(StockUsuarioActivity.this, LoginActivity.class);
+            ComponentName cn = intent.getComponent();
+            Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+            startActivity(mainIntent);
         }
     };
 
-    DialogInterface.OnClickListener alertCancelOnClickListener = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialogInterface, int i) {
-            dialogInterface.dismiss();
-        }
-    };
+//    DialogInterface.OnClickListener alertCancelOnClickListener = new DialogInterface.OnClickListener() {
+//        @Override
+//        public void onClick(DialogInterface dialogInterface, int i) {
+//            dialogInterface.dismiss();
+//        }
+//    };
 }

@@ -1,11 +1,13 @@
 package com.example.javierhuinocana.grupo03_cibertec;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.content.IntentCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -179,7 +181,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
                 //cerrar sesion
                 case 3:
                     new AlertDialog.Builder(ListaOrdenesActivity.this).setTitle("Cerrar Sesion").setMessage("¿Desea cerrar sesion?")
-                            .setNegativeButton("Cancelar", alertCancelOnClickListener).setPositiveButton("Aceptar", alertAcceptOnClickListener)
+                            .setNegativeButton("Cancelar", null).setPositiveButton("Aceptar", alertAcceptOnClickListener)
                             .setCancelable(false).show();
                     break;
                 default:
@@ -319,21 +321,18 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
     DialogInterface.OnClickListener alertAcceptOnClickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
+            dialogInterface.dismiss();
             SharedPreferences settings = getSharedPreferences("Usuario", Context.MODE_PRIVATE);
-            settings.edit().clear().commit();
+            /*BORRAMOS SOLO IDUSUARIO,NOMBREUSUARIO,NICKUSUARIO*/
+            settings.edit().remove("IdUsuario").commit();
+            settings.edit().remove("nombreUsuario").commit();
+            settings.edit().remove("nickUsuario").commit();
+
+            /*CODIGO PARA CERRAR TODAS LAS ACTIVITYS*/
             Intent intent = new Intent(ListaOrdenesActivity.this, LoginActivity.class);
-                finish();
-
-            startActivity(intent);
-            dialogInterface.dismiss();
+            ComponentName cn = intent.getComponent();
+            Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+            startActivity(mainIntent);
         }
     };
-
-    DialogInterface.OnClickListener alertCancelOnClickListener = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialogInterface, int i) {
-            dialogInterface.dismiss();
-        }
-    };
-
 }

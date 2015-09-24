@@ -15,12 +15,12 @@ import com.example.javierhuinocana.grupo03_cibertec.dao.DataBaseHelper;
 import com.example.javierhuinocana.grupo03_cibertec.dao.UsuarioDAO;
 import com.example.javierhuinocana.grupo03_cibertec.entities.Usuario;
 
+
 public class LoginActivity extends AppCompatActivity {
 
     EditText txtUsuario, txtPassword;
     Button btnIngresar;
     private DataBaseHelper dataBaseHelper;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         txtUsuario = (EditText) findViewById(R.id.txtUsuario);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
         btnIngresar = (Button) findViewById(R.id.btnIngresar);
+
         final SharedPreferences preferencias = getSharedPreferences("Usuario", MODE_PRIVATE);
 
          /*CREAMOS Y/O COPIAMOS BD AL CELULAR*/
@@ -80,12 +81,11 @@ public class LoginActivity extends AppCompatActivity {
                             setNeutralButton(getResources().getString(R.string.Aceptar_login), alertSingleOnClickListener).setCancelable(false).show();
                     txtUsuario.setText("");
                     txtPassword.setText("");
-                    txtUsuario.setFocusable(true);
+                    txtUsuario.requestFocus();
                 }
             }
         });
     }
-
 
     DialogInterface.OnClickListener alertSingleOnClickListener = new DialogInterface.OnClickListener() {
         @Override
