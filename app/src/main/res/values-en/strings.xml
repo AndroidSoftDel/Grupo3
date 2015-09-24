@@ -14,7 +14,7 @@
     <string name="LoginTitulo_login">Login</string>
     <string name="Ingrese_Usuario_Contrasenia">Enter Username and Password</string>
     <string name="Usuario_Contrasenia_Icorrecta_login">User and / or password incorrect</string>
-    <string name="Aceptar_login">OK</string>
+    <string name="aceptar">OK</string>
 
     <!--Action Bar: MENU-->
     <string name="verMapa">See Map</string>
@@ -25,6 +25,16 @@
 
     <!--LAYOUT: LISTA_ORDENES.XML-->
     <string name="filtrar">Filter:</string>
+    <string name="filtrar_pendiente">Pending</string>
+    <string name="filtrar_rechazada">Rejected</string>
+    <string name="filtrar_liquidada">Liquidated</string>
+    <string name="drawable_item_cambiar_clave">Change Password</string>
+    <string name="drawable_item_ver_stock">See Stock</string>
+    <string name="drawable_item_cerrar_sesion">Close Session</string>
+    <string name="drawable_item_cambiar_idioma">Change Language</string>
+    <string name="alert_dialog_cerrar_sesion">Do you want to close this session?</string>
+    <string name="alert_dialog_cambiar_idioma">Do you want to change language?</string>
+    <string name="cancelar">Cancel</string>
 
     <!--LAYOUT: DETALLE_ORDEN.XML-->
     <string name="zonal_detalle">Zonal:</string>
@@ -33,11 +43,14 @@
     <string name="orden_detalle">Order:</string>
     <string name="telefono_detalle">Phone:</string>
     <string name="fecha_registro_detalle">Registration.D:</string>
+    <string name="fecha_registro_liquidacion">Liquid.D:</string>
+    <string name="fecha_registro_rechazo">Reject.D:</string>
     <string name="cliente_detalle">Client:</string>
     <string name="direccion_detalle">Address:</string>
     <string name="mapa_detalle">MAP</string>
     <string name="liquidar_detalle">SETTLE:</string>
     <string name="rechazar_detalle">REJECT</string>
+    <string name="material_mensaje">Order has not liquidated materials</string>
 
     <!--LAYOUT: LIQUIDAR_ORDEN.XML-->
     <string name="liquidar_orden_id">Order:</string>
@@ -49,6 +62,14 @@
     <string name="liquidar_orden_observaciones">Observations</string>
     <string name="liquidar_orden_liquidar">Settle</string>
     <string name="liquidar_orden_cancelar">Cancel</string>
+
+    <string name="liquidar_nombre_error">Enter customer name</string>
+    <string name="liquidar_dni_error">Enter a valid DNI</string>
+    <string name="liquidar_obs_error">Enter comments</string>
+    <string name="liquidar_mensaje_error">Order was not settled</string>
+    <string name="liquidar_mensaje_ok">Order settled</string>
+    <string name="rechazar_mensaje_ok">Order Rejected</string>
+    <string name="liquidar_mensaje_cancelar">Action canceled</string>
 
     <string name="subtitulo_descripcion"><u>Description</u></string>
     <string name="subtitulo_cantidad"><u>Quantity</u></string>
@@ -62,6 +83,13 @@
     <string name="nueva_clave_cambioClave">New Password</string>
     <string name="nuevaclave2_cambioClave">Re-enter new password</string>
     <string name="btnCambiarClave">Change Password</string>
+    <string name="error_clave_actual">Enter current password</string>
+    <string name="error_clave_nueva">Enter new password</string>
+    <string name="alert_cambio_clave">Change Password</string>
+    <string name="alert_cambio_clave_mensaje">Password was changed successfully</string>
+    <string name="alert_cambio_clave_mensaje_error">Passwords do not match</string>
+    <string name="alert_cambio_clave_mensaje_error2">Incorrect login or password</string>
+
 
     <string-array name="navigation_drawer_items_array">
         <item>Change Password</item>

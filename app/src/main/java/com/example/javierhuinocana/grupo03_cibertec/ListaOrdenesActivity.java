@@ -42,7 +42,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
     public final int Code_Respuesta = 2;
 
     Spinner cboFiltrar;
-    private SpinerAdapter SpinerAdaptador;
+    private SpinerAdapter spinerAdapter;
     private RecyclerView rvPrincipal;
     private RVListadoAdapter rvListadoAdapter;
 
@@ -71,13 +71,13 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         /*CREAMOS LOS ITEM PARA EL SPINER*/
         ArrayList<String> ArrayFiltro = new ArrayList<>();
 
-        ArrayFiltro.add("Pendientes");
-        ArrayFiltro.add("Liquidadas");
-        ArrayFiltro.add("Rechazadas");
+        ArrayFiltro.add(getResources().getString(R.string.filtrar_pendiente));
+        ArrayFiltro.add(getResources().getString(R.string.filtrar_liquidada));
+        ArrayFiltro.add(getResources().getString(R.string.filtrar_rechazada));
 
         /*ASOCIAMOS EL ADAPTADOR AL SPINER*/
-        SpinerAdaptador = new SpinerAdapter(ListaOrdenesActivity.this, ArrayFiltro);
-        cboFiltrar.setAdapter(SpinerAdaptador);
+        spinerAdapter = new SpinerAdapter(ListaOrdenesActivity.this, ArrayFiltro);
+        cboFiltrar.setAdapter(spinerAdapter);
 
 
         rvPrincipal = (RecyclerView) findViewById(R.id.rvPrincipal);
@@ -91,11 +91,11 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         SharedPreferences preferences = getSharedPreferences("Usuario", Context.MODE_PRIVATE);
 
 
-        drawerItem[0] = new ObjectDrawerItem(R.drawable.user_white, preferences.getString("nombreUsuario", "").toString());
-        drawerItem[1] = new ObjectDrawerItem(R.drawable.change_password_white, "Cambiar Contraseña");
-        drawerItem[2] = new ObjectDrawerItem(R.drawable.stock_white , "Ver Stock");
-        drawerItem[3] = new ObjectDrawerItem(R.drawable.close_white, "Cerrar Sesion");
-        drawerItem[4] = new ObjectDrawerItem(R.drawable.ic_language_white_36dp, "Cambiar Idioma");
+        drawerItem[0] = new ObjectDrawerItem(R.drawable.user_white, preferences.getString("nombreUsuario", ""));
+        drawerItem[1] = new ObjectDrawerItem(R.drawable.change_password_white, getResources().getString(R.string.drawable_item_cambiar_clave));
+        drawerItem[2] = new ObjectDrawerItem(R.drawable.stock_white, getResources().getString(R.string.drawable_item_ver_stock));
+        drawerItem[3] = new ObjectDrawerItem(R.drawable.close_white, getResources().getString(R.string.drawable_item_cerrar_sesion));
+        drawerItem[4] = new ObjectDrawerItem(R.drawable.ic_language_white_36dp, getResources().getString(R.string.drawable_item_cambiar_idioma));
 
 
         mNavigationDrawerItemTitles = getResources().getStringArray(R.array.navigation_drawer_items_array);
@@ -181,14 +181,20 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
                     break;
                 //cerrar sesion
                 case 3:
-                    new AlertDialog.Builder(ListaOrdenesActivity.this).setTitle("Cerrar Sesion").setMessage("¿Desea cerrar sesion?")
-                            .setNegativeButton("Cancelar", null).setPositiveButton("Aceptar", alertAcceptCerrarSesionOnClickListener)
-                            .setCancelable(false).show();
+                    new AlertDialog.Builder(ListaOrdenesActivity.this)
+                            .setTitle(getResources().getString(R.string.drawable_item_cerrar_sesion))
+                            .setMessage(getResources().getString(R.string.alert_dialog_cerrar_sesion))
+                            .setNegativeButton(getResources().getString(R.string.cancelar), null)
+                            .setPositiveButton(getResources().getString(R.string.aceptar),
+                                            alertAcceptCerrarSesionOnClickListener).setCancelable(false).show();
                     break;
                 //cambiar idioma
                 case 4:
-                    new AlertDialog.Builder(ListaOrdenesActivity.this).setTitle("Cerrar Sesion").setMessage("¿Desea cerrar sesion?")
-                            .setNegativeButton("Cancelar", null).setPositiveButton("Aceptar", alertAcceptCambiarIdiomaOnClickListener)
+                    new AlertDialog.Builder(ListaOrdenesActivity.this)
+                            .setTitle(getResources().getString(R.string.drawable_item_cambiar_idioma))
+                            .setMessage(getResources().getString(R.string.alert_dialog_cambiar_idioma))
+                            .setNegativeButton(getResources().getString(R.string.cancelar), null)
+                            .setPositiveButton(getResources().getString(R.string.aceptar), alertAcceptCambiarIdiomaOnClickListener)
                             .setCancelable(false).show();
                     break;
                 default:
@@ -295,7 +301,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         Intent intent = new Intent(ListaOrdenesActivity.this, DetalleOrdenesActivity.class);
         intent.putExtra(ARG_ORDEN, listaOrdenes);
         intent.putExtra(ARG_POSITION, position);
-        startActivityForResult(intent,Code_Respuesta);
+        startActivityForResult(intent, Code_Respuesta);
         //startActivityForResult(intent, REQUEST_CODE_EDITAR);
         //Toast.makeText(ListaOrdenesActivity.this, listaOrdenes.getOrden(), Toast.LENGTH_SHORT).show();
     }

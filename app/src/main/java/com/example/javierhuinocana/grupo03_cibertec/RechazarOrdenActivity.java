@@ -75,7 +75,7 @@ public class RechazarOrdenActivity extends AppCompatActivity {
             //No es necesario llenar DNI si se rechaza la orden, pero si se ingresa algo debe ser un DNI correcto
             if (tilDni_Rechazar.getEditText().getText().toString().trim().length() > 0) {
                 if (tilDni_Rechazar.getEditText().getText().toString().trim().length() != 8) {
-                    tilDni_Rechazar.setError("Ingrese un DNI válido");
+                    tilDni_Rechazar.setError(getResources().getString(R.string.liquidar_dni_error));
                     tilDni_Rechazar.setErrorEnabled(true);
                     isCorrect = false;
                 } else
@@ -84,7 +84,7 @@ public class RechazarOrdenActivity extends AppCompatActivity {
                 listaOrdenes.setDniCliente("");
             //Si es obligatorio ingresar una observacion si se rechaza la orden
             if (tilObservaciones_Rechazar.getEditText().getText().toString().trim().length() <= 0) {
-                tilObservaciones_Rechazar.setError("Ingrese las observaciones");
+                tilObservaciones_Rechazar.setError(getResources().getString(R.string.liquidar_obs_error));
                 tilObservaciones_Rechazar.setErrorEnabled(true);
                 isCorrect = false;
             } else
@@ -102,7 +102,7 @@ public class RechazarOrdenActivity extends AppCompatActivity {
                 ListadoDAO listadoDAO = new ListadoDAO();
                 long rc = listadoDAO.updateListado(listaOrdenes);
                 if (rc == 1) {
-                    Toast.makeText(RechazarOrdenActivity.this, "Orden Rechazada", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RechazarOrdenActivity.this, getResources().getString(R.string.rechazar_mensaje_ok), Toast.LENGTH_LONG).show();
                     setResult(RESULT_OK, new Intent());
                     finish();
                 }
@@ -115,7 +115,7 @@ public class RechazarOrdenActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            Toast.makeText(RechazarOrdenActivity.this, "Acción cancelada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RechazarOrdenActivity.this, getResources().getString(R.string.liquidar_mensaje_cancelar), Toast.LENGTH_SHORT).show();
             finish();
         }
     };

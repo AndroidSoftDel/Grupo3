@@ -54,23 +54,23 @@ public class CambioContrasenaActivity extends AppCompatActivity {
 
             if (tilAntiguaClave_cambioClave.getEditText().getText().toString().trim().length() <= 0) {
                 tilAntiguaClave_cambioClave.setErrorEnabled(true);
-                tilAntiguaClave_cambioClave.setError("Ingrese clave actual");
+                tilAntiguaClave_cambioClave.setError(getResources().getString(R.string.error_clave_actual));
                 return;
             }
 
             if (tilNuevaClave_cambioClave.getEditText().getText().toString().trim().length() <= 0) {
                 tilNuevaClave_cambioClave.setErrorEnabled(true);
-                tilNuevaClave_cambioClave.setError("Ingrese clave nueva");
+                tilNuevaClave_cambioClave.setError(getResources().getString(R.string.error_clave_nueva));
                 return;
             }
 
             if (tilNuevaClave2_cambioClave.getEditText().getText().toString().trim().length() <= 0) {
                 tilNuevaClave2_cambioClave.setErrorEnabled(true);
-                tilNuevaClave2_cambioClave.setError("Ingrese clave nueva");
+                tilNuevaClave2_cambioClave.setError(getResources().getString(R.string.error_clave_nueva));
                 return;
             }
 
-            user = usuarioDAO.obtenerUsuario(preferences.getString("nickUsuario", "").toString().trim().toLowerCase(),
+            user = usuarioDAO.obtenerUsuario(preferences.getString("nickUsuario", "").trim().toLowerCase(),
                     tilAntiguaClave_cambioClave.getEditText().getText().toString().trim().toLowerCase());
 
             //validar usuario y contraseña
@@ -82,14 +82,20 @@ public class CambioContrasenaActivity extends AppCompatActivity {
                     rpta = usuarioDAO.actualizarContraseña(user.getIdUsuario(),
                             tilNuevaClave_cambioClave.getEditText().getText().toString().trim().toLowerCase());
                     if (rpta != 0) {
-                        new AlertDialog.Builder(CambioContrasenaActivity.this).setTitle("Cambio de Contraseña").setMessage("Se ha cambiado la clave satisfactoriamente").
-                                setNeutralButton("Aceptar", CambioClaveOnClickListener).setCancelable(false).show();
+                        new AlertDialog.Builder(CambioContrasenaActivity.this)
+                                .setTitle(getResources().getString(R.string.alert_cambio_clave))
+                                .setMessage(getResources().getString(R.string.alert_cambio_clave_mensaje)).
+                                setNeutralButton(getResources().getString(R.string.aceptar), CambioClaveOnClickListener)
+                                .setCancelable(false).show();
 
                         //se eliminan los datos de shared preferences
                     }
                 } else {
-                    new AlertDialog.Builder(CambioContrasenaActivity.this).setTitle("Cambio de Contraseña").setMessage("Las contraseñas no coinciden").
-                            setNeutralButton("Aceptar", alertSingleOnClickListener).setCancelable(false).show();
+                    new AlertDialog.Builder(CambioContrasenaActivity.this)
+                            .setTitle(getResources().getString(R.string.alert_cambio_clave))
+                            .setMessage(getResources().getString(R.string.alert_cambio_clave_mensaje_error)).
+                            setNeutralButton(getResources().getString(R.string.aceptar), alertSingleOnClickListener)
+                            .setCancelable(false).show();
                     tilNuevaClave_cambioClave.getEditText().setText("");
                     tilNuevaClave2_cambioClave.getEditText().setText("");
                     tilNuevaClave_cambioClave.getEditText().setFocusable(true);
@@ -99,10 +105,11 @@ public class CambioContrasenaActivity extends AppCompatActivity {
             //usuario y clave incorrectas
             else {
 
-                new AlertDialog.Builder(CambioContrasenaActivity.this).setTitle("Cambio de Contraseña").setMessage("Usuario o contraseña incorrecta"
-                        + " user: " + preferences.getString("nickUsuario", "").toString().trim().toLowerCase() + " pass: " +
-                        tilAntiguaClave_cambioClave.getEditText().getText().toString().trim().toLowerCase()).
-                        setNeutralButton("Aceptar", alertSingleOnClickListener).setCancelable(false).show();
+                new AlertDialog.Builder(CambioContrasenaActivity.this)
+                        .setTitle(getResources().getString(R.string.alert_cambio_clave))
+                        .setMessage(getResources().getString(R.string.alert_cambio_clave_mensaje_error2))
+                        .setNeutralButton(getResources().getString(R.string.aceptar), alertSingleOnClickListener)
+                        .setCancelable(false).show();
 
                 tilAntiguaClave_cambioClave.getEditText().setText("");
                 tilNuevaClave_cambioClave.getEditText().setText("");

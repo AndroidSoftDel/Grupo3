@@ -58,11 +58,12 @@ public class StockUsuarioActivity extends AppCompatActivity implements RVStockUs
         rvStock.setAdapter(rvStockUsuarioAdapter);
 
         SharedPreferences preferences = getSharedPreferences("Usuario", Context.MODE_PRIVATE);
-        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[4];
+        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[5];
         drawerItem[0] = new ObjectDrawerItem(R.drawable.user_white, preferences.getString("nombreUsuario", "").toString());
-        drawerItem[1] = new ObjectDrawerItem(R.drawable.change_password_white, "Cambiar Contraseña");
-        drawerItem[2] = new ObjectDrawerItem(R.drawable.stock_white, "Ver Stock");
-        drawerItem[3] = new ObjectDrawerItem(R.drawable.close_white, "Cerrar Sesion");
+        drawerItem[1] = new ObjectDrawerItem(R.drawable.change_password_white, getResources().getString(R.string.drawable_item_cambiar_clave));
+        drawerItem[2] = new ObjectDrawerItem(R.drawable.stock_white, getResources().getString(R.string.drawable_item_ver_stock));
+        drawerItem[3] = new ObjectDrawerItem(R.drawable.close_white, getResources().getString(R.string.drawable_item_cerrar_sesion));
+        drawerItem[4] = new ObjectDrawerItem(R.drawable.ic_language_white_36dp, getResources().getString(R.string.drawable_item_cambiar_idioma));
 
         mNavigationDrawerItemTitles = getResources().getStringArray(R.array.navigation_drawer_items_array);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -112,10 +113,21 @@ public class StockUsuarioActivity extends AppCompatActivity implements RVStockUs
                     //dlmenustock.closeDrawers();
                     break;
                 case 3:
-                    new AlertDialog.Builder(StockUsuarioActivity.this).setTitle("Cerrar Sesion").setMessage("¿Desea cerrar sesion?")
-                            .setNegativeButton("Cancelar", null).setPositiveButton("Aceptar", alertAcceptOnClickListener)
-                            .setCancelable(false).show();
+                    new AlertDialog.Builder(StockUsuarioActivity.this)
+                            .setTitle(getResources().getString(R.string.drawable_item_cerrar_sesion))
+                            .setMessage(getResources().getString(R.string.alert_dialog_cerrar_sesion))
+                            .setNegativeButton(getResources().getString(R.string.cancelar), null)
+                            .setPositiveButton(getResources().getString(R.string.aceptar),
+                                    alertAcceptOnClickListener).setCancelable(false).show();
                     dlmenustock.closeDrawers();
+                    break;
+                case 4:
+                    new AlertDialog.Builder(StockUsuarioActivity.this)
+                            .setTitle(getResources().getString(R.string.drawable_item_cambiar_idioma))
+                            .setMessage(getResources().getString(R.string.alert_dialog_cambiar_idioma))
+                            .setNegativeButton(getResources().getString(R.string.cancelar), null)
+                            .setPositiveButton(getResources().getString(R.string.aceptar), alertAcceptCambiarIdiomaOnClickListener)
+                            .setCancelable(false).show();
                     break;
                 default:
                     break;
@@ -187,4 +199,21 @@ public class StockUsuarioActivity extends AppCompatActivity implements RVStockUs
 //            dialogInterface.dismiss();
 //        }
 //    };
+
+
+    DialogInterface.OnClickListener alertAcceptCambiarIdiomaOnClickListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            dialogInterface.dismiss();
+            //se elimina el idioma guardado en las preferencias
+            SharedPreferences preferencias = getSharedPreferences("Usuario", MODE_PRIVATE);
+            preferencias.edit().remove("IDIOMA").commit();
+
+            /*CODIGO PARA CERRAR TODAS LAS ACTIVITYS*/
+            Intent intent = new Intent(StockUsuarioActivity.this, MainActivity.class);
+            ComponentName cn = intent.getComponent();
+            Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+            startActivity(mainIntent);
+        }
+    };
 }

@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (txtUsuario.getText().toString().trim().length() <= 0 || txtPassword.getText().toString().trim().length() <= 0) {
                     new AlertDialog.Builder(LoginActivity.this).setTitle(getResources().getString(R.string.LoginTitulo_login)).setMessage(getResources().getString(R.string.Ingrese_Usuario_Contrasenia)).
-                            setNeutralButton(getResources().getString(R.string.Aceptar_login), alertSingleOnClickListener).setCancelable(false).show();
+                            setNeutralButton(getResources().getString(R.string.aceptar), alertSingleOnClickListener).setCancelable(false).show();
                     return;
                 }
                 //consulta a base de datos
@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 } else {
                     new AlertDialog.Builder(LoginActivity.this).setTitle(getResources().getString(R.string.LoginTitulo_login)).setMessage(getResources().getString(R.string.Usuario_Contrasenia_Icorrecta_login)).
-                            setNeutralButton(getResources().getString(R.string.Aceptar_login), alertSingleOnClickListener).setCancelable(false).show();
+                            setNeutralButton(getResources().getString(R.string.aceptar), alertSingleOnClickListener).setCancelable(false).show();
                     txtUsuario.setText("");
                     txtPassword.setText("");
                     txtUsuario.requestFocus();

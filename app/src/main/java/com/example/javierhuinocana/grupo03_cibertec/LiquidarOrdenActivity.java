@@ -151,7 +151,7 @@ public class LiquidarOrdenActivity extends AppCompatActivity implements RVMateri
             tilObservaciones_Liquidar.setErrorEnabled(false);
 
             if (tilNombre_Liquidar.getEditText().getText().toString().trim().length() <= 0) {
-                tilNombre_Liquidar.setError("Ingrese un nombre de cliente");
+                tilNombre_Liquidar.setError(getResources().getString(R.string.liquidar_nombre_error));
                 tilNombre_Liquidar.setErrorEnabled(true);
                 //isCorrect = false;
                 return;
@@ -160,7 +160,7 @@ public class LiquidarOrdenActivity extends AppCompatActivity implements RVMateri
             }
 
             if (tilDni_Liquidar.getEditText().getText().toString().trim().length() != 8) {
-                tilDni_Liquidar.setError("Ingrese un DNI válido");
+                tilDni_Liquidar.setError(getResources().getString(R.string.liquidar_dni_error));
                 tilDni_Liquidar.setErrorEnabled(true);
                 //isCorrect = false;
                 return;
@@ -169,7 +169,7 @@ public class LiquidarOrdenActivity extends AppCompatActivity implements RVMateri
             }
 
             if (tilObservaciones_Liquidar.getEditText().getText().toString().trim().length() <= 0) {
-                tilObservaciones_Liquidar.setError("Ingrese las observaciones");
+                tilObservaciones_Liquidar.setError(getResources().getString(R.string.liquidar_obs_error));
                 tilObservaciones_Liquidar.setErrorEnabled(true);
                 //isCorrect = false;
                 return;
@@ -204,9 +204,9 @@ public class LiquidarOrdenActivity extends AppCompatActivity implements RVMateri
             ListadoDAO listadoDAO = new ListadoDAO();
             long rc = listadoDAO.LiquidarOrden(listaOrdenes, DataMaterialesGuardar);
             if (rc == 0) {
-                Toast.makeText(LiquidarOrdenActivity.this, "No se liquidó Orden", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LiquidarOrdenActivity.this, getResources().getString(R.string.liquidar_mensaje_error), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(LiquidarOrdenActivity.this, "Orden Liquidada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LiquidarOrdenActivity.this, getResources().getString(R.string.liquidar_mensaje_ok), Toast.LENGTH_SHORT).show();
                 setResult(RESULT_OK, new Intent());
                 finish();
             }
@@ -219,7 +219,7 @@ public class LiquidarOrdenActivity extends AppCompatActivity implements RVMateri
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(LiquidarOrdenActivity.this, "Acción cancelada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LiquidarOrdenActivity.this, getResources().getString(R.string.liquidar_mensaje_cancelar), Toast.LENGTH_SHORT).show();
             finish();
         }
     };

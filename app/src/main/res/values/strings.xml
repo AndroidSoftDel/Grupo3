@@ -14,7 +14,8 @@
     <string name="LoginTitulo_login">Iniciar Sesión</string>
     <string name="Ingrese_Usuario_Contrasenia">Ingrese Usuario y Contraseña</string>
     <string name="Usuario_Contrasenia_Icorrecta_login">Usuario y Contraseña Incorrectos</string>
-    <string name="Aceptar_login">Aceptar</string>
+    <string name="aceptar">Aceptar</string>
+
 
     <!--Action Bar: MENU-->
     <string name="verMapa">Ver Mapa</string>
@@ -25,6 +26,18 @@
 
     <!--LAYOUT: LISTA_ORDENES.XML-->
     <string name="filtrar">Filtrar:</string>
+    <string name="filtrar_pendiente">Pendientes</string>
+    <string name="filtrar_rechazada">Rechazadas</string>
+    <string name="filtrar_liquidada">Liquidadas</string>
+    <string name="drawable_item_cambiar_clave">Cambiar Contraseña</string>
+    <string name="drawable_item_ver_stock">Ver Stock</string>
+    <string name="drawable_item_cerrar_sesion">Cerrar Sesion</string>
+    <string name="drawable_item_cambiar_idioma">Cambiar Idioma</string>
+
+    <string name="alert_dialog_cerrar_sesion">¿Desea cerrar sesion?</string>
+    <string name="alert_dialog_cambiar_idioma">¿Desea cambiar de idioma?</string>
+    <string name="cancelar">Cancelar</string>
+
 
     <!--LAYOUT: DETALLE_ORDEN.XML-->
     <string name="zonal_detalle">Zonal:</string>
@@ -33,11 +46,15 @@
     <string name="orden_detalle">Orden:</string>
     <string name="telefono_detalle">Teléfono:</string>
     <string name="fecha_registro_detalle">F.Registro:</string>
+    <string name="fecha_registro_liquidacion">F.Liquid:</string>
+    <string name="fecha_registro_rechazo">F.Rechazo:</string>
     <string name="cliente_detalle">Cliente:</string>
     <string name="direccion_detalle">Dirección:</string>
     <string name="mapa_detalle">MAPA</string>
     <string name="liquidar_detalle">LIQUIDAR:</string>
     <string name="rechazar_detalle">RECHAZAR</string>
+    <string name="material_mensaje">Orden no tiene Materiales Liquidados</string>
+
 
     <!--LAYOUT: LIQUIDAR_ORDEN.XML-->
     <string name="liquidar_orden_id">Orden:</string>
@@ -49,6 +66,14 @@
     <string name="liquidar_orden_observaciones">Observaciones</string>
     <string name="liquidar_orden_liquidar">Liquidar</string>
     <string name="liquidar_orden_cancelar">Cancelar</string>
+
+    <string name="liquidar_nombre_error">Ingrese nombre del cliente</string>
+    <string name="liquidar_dni_error">Ingrese un DNI válido</string>
+    <string name="liquidar_obs_error">Ingrese las observaciones</string>
+    <string name="liquidar_mensaje_error">Orden no se liquidó</string>
+    <string name="liquidar_mensaje_ok">Orden Liquidada</string>
+    <string name="rechazar_mensaje_ok">Orden Rechazada</string>
+    <string name="liquidar_mensaje_cancelar">Acción cancelada</string>
 
     <string name="subtitulo_descripcion"><u>Descripción</u></string>
     <string name="subtitulo_cantidad"><u>Cantidad</u></string>
@@ -63,6 +88,13 @@
     <string name="nueva_clave_cambioClave">Contraseña nueva</string>
     <string name="nuevaclave2_cambioClave">Reingrese nueva contraseña</string>
     <string name="btnCambiarClave">Cambiar clave</string>
+    <string name="error_clave_actual">Ingrese clave actual</string>
+    <string name="error_clave_nueva">Ingrese clave nueva</string>
+    <string name="alert_cambio_clave">Cambio de Contraseña</string>
+    <string name="alert_cambio_clave_mensaje">Se ha cambiado la clave satisfactoriamente</string>
+    <string name="alert_cambio_clave_mensaje_error">Las contraseñas no coinciden</string>
+    <string name="alert_cambio_clave_mensaje_error2">Usuario o contraseña incorrecta</string>
+
 
     <string-array name="navigation_drawer_items_array">
         <item>Cambiar Contraseña</item>

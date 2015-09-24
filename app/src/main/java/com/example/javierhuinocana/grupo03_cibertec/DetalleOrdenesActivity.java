@@ -75,9 +75,9 @@ public class DetalleOrdenesActivity extends AppCompatActivity {
             btnRechazar.setVisibility(View.INVISIBLE);
             lyFechaModificacion_Detalle.setVisibility(View.VISIBLE);
             if (listaOrdenes.getEstado() == 1)
-                tvFechaModicicacion_Detalle.setText("F.Liq");
+                tvFechaModicicacion_Detalle.setText(getResources().getString(R.string.fecha_registro_liquidacion));
             else
-                tvFechaModicicacion_Detalle.setText("F.Rechazo");
+                tvFechaModicicacion_Detalle.setText(getResources().getString(R.string.fecha_registro_rechazo));
         } else {
             btnVerMapa.setOnClickListener(btnVerMapaOnClickListener);
             btnLiquidar.setOnClickListener(btnLiquidarOnClickListener);
@@ -115,7 +115,7 @@ public class DetalleOrdenesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_ver_materiales) {
             if (arrayMateriales == null) {
-                Toast.makeText(DetalleOrdenesActivity.this, "Orden no tiene Materiales Liquidados", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DetalleOrdenesActivity.this, getResources().getString(R.string.material_mensaje), Toast.LENGTH_SHORT).show();
             } else {
                 Intent intent = new Intent(DetalleOrdenesActivity.this, DetalleMaterialesLiquidadosActivity.class);
                 intent.putExtra(KEY_ARG, arrayMateriales);
