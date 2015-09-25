@@ -38,7 +38,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Orden"
+                        android:text="@string/Orden_ListaOrdenes"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -60,7 +60,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Telefono"
+                        android:text="@string/Telefono_ListaOrdenes"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -81,7 +81,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Negocio"
+                        android:text="@string/Negocio_ListaOrdenes"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -103,7 +103,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Actividad"
+                        android:text="@string/Actividad_ListaOrdenes"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 

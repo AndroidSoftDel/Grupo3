@@ -21,6 +21,7 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.example.javierhuinocana.grupo03_cibertec.adap_recyclerview.DrawerItemCustomAdapter;
 import com.example.javierhuinocana.grupo03_cibertec.adap_recyclerview.RVListadoAdapter;
@@ -280,7 +281,6 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
                     /*PENDIENTES*/
                     rvListadoAdapter = new RVListadoAdapter(ListaOrdenesActivity.this, ListaArray_Pendientes);
                     rvPrincipal.setAdapter(rvListadoAdapter);
-
                     break;
                 case 1:
                     /*LIQUIDADAS*/
@@ -294,6 +294,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
 
                     break;
             }
+            Toast.makeText(ListaOrdenesActivity.this,rvListadoAdapter.getItemCount() + " Ordenes",Toast.LENGTH_SHORT).show();
         }
 
         @Override

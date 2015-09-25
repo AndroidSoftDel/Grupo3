@@ -90,6 +90,12 @@
     <string name="alert_cambio_clave_mensaje_error">Passwords do not match</string>
     <string name="alert_cambio_clave_mensaje_error2">Incorrect login or password</string>
 
+    <!--LAYOUT: ITEM_ORDEN (LISTA ORDENES) -->
+    <string name="Orden_ListaOrdenes">Order</string>
+    <string name="Telefono_ListaOrdenes">Phone</string>
+    <string name="Negocio_ListaOrdenes">Business</string>
+    <string name="Actividad_ListaOrdenes">Activity</string>
+
 
     <string-array name="navigation_drawer_items_array">
         <item>Change Password</item>

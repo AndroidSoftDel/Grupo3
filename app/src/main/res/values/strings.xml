@@ -95,6 +95,11 @@
     <string name="alert_cambio_clave_mensaje_error">Las contraseñas no coinciden</string>
     <string name="alert_cambio_clave_mensaje_error2">Usuario o contraseña incorrecta</string>
 
+    <!--LAYOUT: ITEM_ORDEN (LISTA ORDENES) -->
+    <string name="Orden_ListaOrdenes">Orden</string>
+    <string name="Telefono_ListaOrdenes">Teléfono</string>
+    <string name="Negocio_ListaOrdenes">Negocio</string>
+    <string name="Actividad_ListaOrdenes">Actividad</string>
 
     <string-array name="navigation_drawer_items_array">
         <item>Cambiar Contraseña</item>

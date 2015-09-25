@@ -60,7 +60,9 @@ public class MainActivity extends AppCompatActivity {
             if (CAMBIAR_IDIOMA == false) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
-            }
+            } else
+                Toast.makeText(MainActivity.this, "Idioma Cambiado", Toast.LENGTH_SHORT).show();
+
             finish();
         }
     };
@@ -76,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
             if (CAMBIAR_IDIOMA == false) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
-            }
+            }else
+                Toast.makeText(MainActivity.this, "Language Changed", Toast.LENGTH_SHORT).show();
+
             finish();
         }
     };
