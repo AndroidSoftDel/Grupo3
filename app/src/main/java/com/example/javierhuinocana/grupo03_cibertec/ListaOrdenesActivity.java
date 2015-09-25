@@ -61,6 +61,8 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
 
     private DataBaseHelper dataBaseHelper;
 
+    public final static String CAMBIAR_IDIOMA = "CAMBIAR_IDIOMA";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -190,12 +192,16 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
                     break;
                 //cambiar idioma
                 case 4:
-                    new AlertDialog.Builder(ListaOrdenesActivity.this)
-                            .setTitle(getResources().getString(R.string.drawable_item_cambiar_idioma))
-                            .setMessage(getResources().getString(R.string.alert_dialog_cambiar_idioma))
-                            .setNegativeButton(getResources().getString(R.string.cancelar), null)
-                            .setPositiveButton(getResources().getString(R.string.aceptar), alertAcceptCambiarIdiomaOnClickListener)
-                            .setCancelable(false).show();
+                    intent = new Intent(ListaOrdenesActivity.this, MainActivity.class);
+                    intent.putExtra(CAMBIAR_IDIOMA, "OK");
+                    startActivity(intent);
+
+//                    new AlertDialog.Builder(ListaOrdenesActivity.this)
+//                            .setTitle(getResources().getString(R.string.drawable_item_cambiar_idioma))
+//                            .setMessage(getResources().getString(R.string.alert_dialog_cambiar_idioma))
+//                            .setNegativeButton(getResources().getString(R.string.cancelar), null)
+//                            .setPositiveButton(getResources().getString(R.string.aceptar), alertAcceptCambiarIdiomaOnClickListener)
+//                            .setCancelable(false).show();
                     break;
                 default:
                     break;
@@ -349,7 +355,7 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
         }
     };
 
-
+    /*
     DialogInterface.OnClickListener alertAcceptCambiarIdiomaOnClickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
@@ -358,13 +364,14 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
             SharedPreferences preferencias = getSharedPreferences("Usuario", MODE_PRIVATE);
             preferencias.edit().remove("IDIOMA").commit();
 
-            /*CODIGO PARA CERRAR TODAS LAS ACTIVITYS*/
+            //CODIGO PARA CERRAR TODAS LAS ACTIVITYS
             Intent intent = new Intent(ListaOrdenesActivity.this, MainActivity.class);
             ComponentName cn = intent.getComponent();
             Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
             startActivity(mainIntent);
         }
     };
+    */
 
 
 }

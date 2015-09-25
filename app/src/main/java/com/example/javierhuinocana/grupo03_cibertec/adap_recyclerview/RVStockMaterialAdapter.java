@@ -70,14 +70,15 @@ public class RVStockMaterialAdapter extends RecyclerView.Adapter<RVStockMaterial
                     /*ES NUMERO*/
                     if (Integer.parseInt(s.toString()) > 0) {
                         if (stockMaterial.getStock() < Integer.parseInt(s.toString())) {
+                            /*GRABAMOS EN EL CAMPO DE LA ENTIDAD LA CANTIDAD INGRESADA*/
+                            stockMaterial.setCantidad(stockMaterial.getStock());
                             rvStockMaterialAdapterViewHolder.tvCantidadAdd.setText(String.valueOf(stockMaterial.getStock()));
                             /*ENVIAMOS EL CURSOR AL FINAL*/
                             ((EditText) rvStockMaterialAdapterViewHolder.tvCantidadAdd).setSelection(String.valueOf(stockMaterial.getStock()).length());
+                        }else {
+                            /*GRABAMOS EN EL CAMPO DE LA ENTIDAD LA CANTIDAD INGRESADA*/
+                            stockMaterial.setCantidad(Integer.parseInt(s.toString()));
                         }
-                        /*GRABAMOS EN EL CAMPO DE LA ENTIDAD LA CANTIDAD INGRESADA*/
-                        stockMaterial.setCantidad(Integer.parseInt(s.toString()));
-                        //mLstStockMaterialadd.add(stockMaterial);
-                        //rvStockMaterialAdapterViewHolder.tvStock.setText(String.valueOf(mLstStockMaterialadd.size()));
                     } else {
                         if (!s.toString().equals("0")) {
                             rvStockMaterialAdapterViewHolder.tvCantidadAdd.setText("0");

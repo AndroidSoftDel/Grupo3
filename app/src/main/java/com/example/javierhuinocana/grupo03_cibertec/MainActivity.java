@@ -17,7 +17,9 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     Button btnEspañol, btnIngles;
-    private SharedPreferences preferencias;// = getSharedPreferences("IDIOMA", MODE_PRIVATE);
+    private SharedPreferences preferencias;
+
+    private Boolean CAMBIAR_IDIOMA = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +34,19 @@ public class MainActivity extends AppCompatActivity {
 
         preferencias = getSharedPreferences("Usuario", MODE_PRIVATE);
 
-        /*PREGUNTAMOS SI YA SE ESCOGIÓ IDIOMA*/
-        if (preferencias.contains("IDIOMA")) {
-            /*CAMBIAMOS A LA CONFIGURACION QUE HAYA ESCOGIDO EL USUARIO*/
-            ConfigurarIdiomaAplicacion(new Locale(preferencias.getString("IDIOMA", "").toString()));
 
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-            finish();
+        /*PREGUNTAMOS SI VIENE ALGO EN EL GETINTENT*/
+        if (getIntent().getExtras() != null && getIntent().getExtras().containsKey(ListaOrdenesActivity.CAMBIAR_IDIOMA)) {
+            CAMBIAR_IDIOMA = true;
+        } else {
+            /*PREGUNTAMOS SI YA SE ESCOGIÓ IDIOMA*/
+            if (preferencias.contains("IDIOMA")) {
+                /*CAMBIAMOS A LA CONFIGURACION QUE HAYA ESCOGIDO EL USUARIO*/
+                ConfigurarIdiomaAplicacion(new Locale(preferencias.getString("IDIOMA", "").toString()));
+
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
+            }
         }
     }
 
@@ -49,8 +57,10 @@ public class MainActivity extends AppCompatActivity {
             ConfigurarIdiomaAplicacion(new Locale("es"));
             GuardarIdiomaSeleccionada("es");
 
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
+            if (CAMBIAR_IDIOMA == false) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
             finish();
         }
     };
@@ -63,8 +73,10 @@ public class MainActivity extends AppCompatActivity {
             ConfigurarIdiomaAplicacion(new Locale("en"));
             GuardarIdiomaSeleccionada("en");
 
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
+            if (CAMBIAR_IDIOMA == false) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
             finish();
         }
     };
@@ -80,5 +92,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferencias.edit();
         editor.putString("IDIOMA", Dato);
         editor.commit();
+
+
     }
 }

@@ -122,12 +122,16 @@ public class StockUsuarioActivity extends AppCompatActivity implements RVStockUs
                     dlmenustock.closeDrawers();
                     break;
                 case 4:
-                    new AlertDialog.Builder(StockUsuarioActivity.this)
-                            .setTitle(getResources().getString(R.string.drawable_item_cambiar_idioma))
-                            .setMessage(getResources().getString(R.string.alert_dialog_cambiar_idioma))
-                            .setNegativeButton(getResources().getString(R.string.cancelar), null)
-                            .setPositiveButton(getResources().getString(R.string.aceptar), alertAcceptCambiarIdiomaOnClickListener)
-                            .setCancelable(false).show();
+                    intent = new Intent(StockUsuarioActivity.this, MainActivity.class);
+                    intent.putExtra(ListaOrdenesActivity.CAMBIAR_IDIOMA, "OK");
+                    startActivity(intent);
+
+//                    new AlertDialog.Builder(StockUsuarioActivity.this)
+//                            .setTitle(getResources().getString(R.string.drawable_item_cambiar_idioma))
+//                            .setMessage(getResources().getString(R.string.alert_dialog_cambiar_idioma))
+//                            .setNegativeButton(getResources().getString(R.string.cancelar), null)
+//                            .setPositiveButton(getResources().getString(R.string.aceptar), alertAcceptCambiarIdiomaOnClickListener)
+//                            .setCancelable(false).show();
                     break;
                 default:
                     break;
@@ -193,14 +197,7 @@ public class StockUsuarioActivity extends AppCompatActivity implements RVStockUs
         }
     };
 
-//    DialogInterface.OnClickListener alertCancelOnClickListener = new DialogInterface.OnClickListener() {
-//        @Override
-//        public void onClick(DialogInterface dialogInterface, int i) {
-//            dialogInterface.dismiss();
-//        }
-//    };
-
-
+    /*
     DialogInterface.OnClickListener alertAcceptCambiarIdiomaOnClickListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
@@ -209,11 +206,12 @@ public class StockUsuarioActivity extends AppCompatActivity implements RVStockUs
             SharedPreferences preferencias = getSharedPreferences("Usuario", MODE_PRIVATE);
             preferencias.edit().remove("IDIOMA").commit();
 
-            /*CODIGO PARA CERRAR TODAS LAS ACTIVITYS*/
+            //CODIGO PARA CERRAR TODAS LAS ACTIVITYS
             Intent intent = new Intent(StockUsuarioActivity.this, MainActivity.class);
             ComponentName cn = intent.getComponent();
             Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
             startActivity(mainIntent);
         }
     };
+    */
 }
