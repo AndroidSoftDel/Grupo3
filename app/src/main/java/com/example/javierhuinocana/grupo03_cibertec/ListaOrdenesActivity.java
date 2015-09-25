@@ -252,12 +252,24 @@ public class ListaOrdenesActivity extends AppCompatActivity implements RVListado
             View controlTem;
             ArrayList<ListaOrdenes> lista = new ArrayList<ListaOrdenes>();
 
-            for (int i = 0; i < rvPrincipal.getAdapter().getItemCount(); i++) {
+            ArrayList<ListaOrdenes> ListaCompleta = rvListadoAdapter.getListaCompelta();
+
+            int totalAchivos = rvPrincipal.getAdapter().getItemCount();
+            for (int i = 0; i < ListaCompleta.size(); i++) {
+                ListaOrdenes Orden = ListaCompleta.get(i);
+                if (Orden.getChequeado() != null) {
+                    if (Orden.getChequeado()) {
+                        lista.add(Orden);
+                    }
+                }
+
+                /*
                 controlTem = rvPrincipal.getChildAt(i);
                 if (((CheckBox) controlTem.findViewById(R.id.chkChequeado)).isChecked()) {
                     ListaOrdenes Orden = rvListadoAdapter.getOrdenes(i);
                     lista.add(Orden);
                 }
+                */
             }
             //lista = rvListadoAdapter.listaChequeada();
             Intent intent = new Intent(ListaOrdenesActivity.this, Mapa_Ordenes.class);

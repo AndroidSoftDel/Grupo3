@@ -23,6 +23,7 @@ public class ListaOrdenes implements Parcelable {
     private String Observaciones;
     private int Estado;
     private int IdUsuario;
+    private Boolean Chequeado;
 
     public ListaOrdenes() {
     }
@@ -155,6 +156,14 @@ public class ListaOrdenes implements Parcelable {
         IdUsuario = idUsuario;
     }
 
+    public Boolean getChequeado() {
+        return Chequeado;
+    }
+
+    public void setChequeado(Boolean chequeado) {
+        Chequeado = chequeado;
+    }
+
     protected ListaOrdenes(Parcel in) {
         IdOrden = in.readInt();
         Zonal = in.readString();
@@ -172,6 +181,8 @@ public class ListaOrdenes implements Parcelable {
         Observaciones = in.readString();
         Estado = in.readInt();
         IdUsuario = in.readInt();
+        byte ChequeadoVal = in.readByte();
+        Chequeado = ChequeadoVal == 0x02 ? null : ChequeadoVal != 0x00;
     }
 
     @Override
@@ -197,6 +208,11 @@ public class ListaOrdenes implements Parcelable {
         dest.writeString(Observaciones);
         dest.writeInt(Estado);
         dest.writeInt(IdUsuario);
+        if (Chequeado == null) {
+            dest.writeByte((byte) (0x02));
+        } else {
+            dest.writeByte((byte) (Chequeado ? 0x01 : 0x00));
+        }
     }
 
     @SuppressWarnings("unused")

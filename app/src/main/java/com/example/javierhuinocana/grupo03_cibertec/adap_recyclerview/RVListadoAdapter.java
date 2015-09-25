@@ -29,10 +29,11 @@ public class RVListadoAdapter extends RecyclerView.Adapter<RVListadoAdapter.RVLi
 
     public interface RVListadoAdapterCallBack {
         void onListadoClick(ListaOrdenes listaOrdenes, int position);
+
         void onCheckChange(boolean isChecked);
     }
 
-    public RVListadoAdapter(RVListadoAdapterCallBack mRVListadoAdapterCallBack,ArrayList<ListaOrdenes> miLista) {
+    public RVListadoAdapter(RVListadoAdapterCallBack mRVListadoAdapterCallBack, ArrayList<ListaOrdenes> miLista) {
         this.mRVListadoAdapterCallBack = mRVListadoAdapterCallBack;
 
         mListaChequeada = new ArrayList<>();
@@ -51,22 +52,29 @@ public class RVListadoAdapter extends RecyclerView.Adapter<RVListadoAdapter.RVLi
     public void onBindViewHolder(final RVListadoAdapterViewHolder rvListadoAdapterViewHolder, int i) {
         final ListaOrdenes listaOrdenes = mLstListaOrdenesFilter.get(i);
         rvListadoAdapterViewHolder.itemView.setTag(i);
+        //rvListadoAdapterViewHolder.chkChequeado.setTag(i);
         rvListadoAdapterViewHolder.itemView.setOnClickListener(itemViewOnClickListener);
         rvListadoAdapterViewHolder.tvOrden.setText(listaOrdenes.getOrden());
         rvListadoAdapterViewHolder.tvTelefono.setText(listaOrdenes.getTelefono());
         rvListadoAdapterViewHolder.tvNegocio.setText(listaOrdenes.getNegocio());
         rvListadoAdapterViewHolder.tvActividad.setText(listaOrdenes.getActividad());
 
+        rvListadoAdapterViewHolder.chkChequeado.setChecked((listaOrdenes.getChequeado() == null) ? false : listaOrdenes.getChequeado());
+
+        //listaOrdenes.setChequeado(false);
+
         rvListadoAdapterViewHolder.chkChequeado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                listaOrdenes.setChequeado(isChecked);
+
                 if (mRVListadoAdapterCallBack != null)
                     mRVListadoAdapterCallBack.onCheckChange(isChecked);
-                if(rvListadoAdapterViewHolder.chkChequeado.isChecked()){
-                    mListaChequeada.add(listaOrdenes);
-                }else {
-                    mListaChequeada.remove(listaOrdenes);
-                }
+                //if(rvListadoAdapterViewHolder.chkChequeado.isChecked()){
+                //    mListaChequeada.add(listaOrdenes);
+                //}else {
+                //    mListaChequeada.remove(listaOrdenes);
+                //}
             }
         });
 
@@ -80,12 +88,16 @@ public class RVListadoAdapter extends RecyclerView.Adapter<RVListadoAdapter.RVLi
         }
     };
 
-    public ListaOrdenes getOrdenes(int position){
+    public ListaOrdenes getOrdenes(int position) {
         return mLstListaOrdenesFilter.get(position);
     }
 
-    public  ArrayList<ListaOrdenes> listaChequeada(){
+    public ArrayList<ListaOrdenes> listaChequeada() {
         return mListaChequeada;
+    }
+
+    public ArrayList<ListaOrdenes> getListaCompelta() {
+        return mLstListaOrdenesFilter;
     }
 
     @Override
@@ -109,7 +121,7 @@ public class RVListadoAdapter extends RecyclerView.Adapter<RVListadoAdapter.RVLi
             tvTelefono = (TextView) itemView.findViewById(R.id.tvTelefono);
             tvNegocio = (TextView) itemView.findViewById(R.id.tvNegocio);
             tvActividad = (TextView) itemView.findViewById(R.id.tvActividad);
-            chkChequeado = (CheckBox)itemView.findViewById(R.id.chkChequeado);
+            chkChequeado = (CheckBox) itemView.findViewById(R.id.chkChequeado);
         }
 
 
