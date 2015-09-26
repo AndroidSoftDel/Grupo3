@@ -59,9 +59,7 @@ public class RVListadoAdapter extends RecyclerView.Adapter<RVListadoAdapter.RVLi
         rvListadoAdapterViewHolder.tvNegocio.setText(listaOrdenes.getNegocio());
         rvListadoAdapterViewHolder.tvActividad.setText(listaOrdenes.getActividad());
 
-        rvListadoAdapterViewHolder.chkChequeado.setChecked((listaOrdenes.getChequeado() == null) ? false : listaOrdenes.getChequeado());
-
-        //listaOrdenes.setChequeado(false);
+        rvListadoAdapterViewHolder.chkChequeado.setTag(mLstListaOrdenesFilter.get(i));
 
         rvListadoAdapterViewHolder.chkChequeado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -122,6 +120,17 @@ public class RVListadoAdapter extends RecyclerView.Adapter<RVListadoAdapter.RVLi
             tvNegocio = (TextView) itemView.findViewById(R.id.tvNegocio);
             tvActividad = (TextView) itemView.findViewById(R.id.tvActividad);
             chkChequeado = (CheckBox) itemView.findViewById(R.id.chkChequeado);
+            /*
+                        chkChequeado.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                CheckBox cb = (CheckBox) v;
+                                ListaOrdenes s = (ListaOrdenes) v.getTag();
+                                s.setChequeado(cb.isChecked());
+                            }
+                        });
+              */
         }
 
 
